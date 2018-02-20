@@ -11,14 +11,14 @@ package project1;
  */
 public class ShiftCipher {
     
-    public StringBuilder plainText;
-    public StringBuilder cipherText;
+    public String plainText;
+    public String cipherText;
     public int key;
     
     //Encrypt message
-    public StringBuilder encrypt(StringBuilder plainText, int key)
+    public StringBuffer encrypt(String plainText, int key)
     {
-        cipherText = plainText;
+        StringBuffer encrypted = new StringBuffer();
         
         for (int i = 0; i < plainText.length(); i++)
         {
@@ -26,45 +26,43 @@ public class ShiftCipher {
             if (Character.isLowerCase(plainText.charAt(i)))
             {
                 char c = (char)(((int)plainText.charAt(i) + key - 50) % 26 + 50);
-                
-                cipherText.append(c);
+                encrypted.append(c);
             }
             //Encrypt uppercase text
             else
             {
                 char c = (char)(((int)plainText.charAt(i) + key - 50) % 26 + 50);
-                
-                cipherText.append(c);
+                encrypted.append(c);
             }
         }
         
-        return cipherText;
+        return encrypted;
     }
     
     //Decrypt message
-    public StringBuilder decrypt(StringBuilder cipherText, int key)
+    public StringBuffer decrypt(String cipherText, int key)
     {
-        plainText = cipherText;
+        StringBuffer decrypted = new StringBuffer();
         
         for (int i = 0; i < cipherText.length(); i++)
         {
             //Encrypt lowercase text
             if (Character.isLowerCase(cipherText.charAt(i)))
             {
-                char c = (char)(((int)cipherText.charAt(i) - key - 50) % 26 + 50);
+                char c = (char)(((int)cipherText.charAt(i) - key + 50) % 26 + 50);
                 
-                plainText.append(c);
+                decrypted.append(c);
             }
             //Encrypt uppercase text
             else
             {
-                char c = (char)(((int)cipherText.charAt(i) - key - 50) % 26 + 50);
+                char c = (char)(((int)cipherText.charAt(i) - key + 50) % 26 + 50);
                 
-                plainText.append(c);
+                decrypted.append(c);
             }
         }
         
-        return plainText;
+        return decrypted;
     }
     
 }

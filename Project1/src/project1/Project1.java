@@ -16,7 +16,22 @@ public class Project1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        //Shift Cipher Test
+        ShiftCipher code = new ShiftCipher();
+        String plainMessage = "Hello World";
+        String cipherMessage;
+        String decodedMessage;
+        int key = 5;
+        
+        System.out.println("Message: " + plainMessage);
+        
+        cipherMessage = code.encrypt(plainMessage, key).toString();
+        System.out.println("Encrypted Message: " + cipherMessage);
+        
+        decodedMessage = code.decrypt(cipherMessage, key).toString();
+        System.out.println("Dencrypted Message: " + decodedMessage);
+        
+        
     }
     
 }
