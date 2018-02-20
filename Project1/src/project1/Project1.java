@@ -29,7 +29,7 @@ public class Project1 {
         System.out.println("Encrypted Message: " + cipherMessage);
         
         decodedMessage = code.decrypt(cipherMessage, key).toString();
-        System.out.println("Dencrypted Message: " + decodedMessage);
+        System.out.println("Decrypted Message: " + decodedMessage);
         
         
     }

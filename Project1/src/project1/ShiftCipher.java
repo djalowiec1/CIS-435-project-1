@@ -10,7 +10,6 @@ package project1;
  * @author Emily
  */
 public class ShiftCipher {
-    
     public String plainText;
     public String cipherText;
     public int key;
@@ -22,18 +21,8 @@ public class ShiftCipher {
         
         for (int i = 0; i < plainText.length(); i++)
         {
-            //Encrypt lowercase text
-            if (Character.isLowerCase(plainText.charAt(i)))
-            {
-                char c = (char)(((int)plainText.charAt(i) + key - 50) % 26 + 50);
-                encrypted.append(c);
-            }
-            //Encrypt uppercase text
-            else
-            {
-                char c = (char)(((int)plainText.charAt(i) + key - 50) % 26 + 50);
-                encrypted.append(c);
-            }
+            char c = (char)((int)plainText.charAt(i) + key);
+            encrypted.append(c);
         }
         
         return encrypted;
@@ -46,20 +35,8 @@ public class ShiftCipher {
         
         for (int i = 0; i < cipherText.length(); i++)
         {
-            //Encrypt lowercase text
-            if (Character.isLowerCase(cipherText.charAt(i)))
-            {
-                char c = (char)(((int)cipherText.charAt(i) - key + 50) % 26 + 50);
-                
-                decrypted.append(c);
-            }
-            //Encrypt uppercase text
-            else
-            {
-                char c = (char)(((int)cipherText.charAt(i) - key + 50) % 26 + 50);
-                
-                decrypted.append(c);
-            }
+            char c = (char)((int)cipherText.charAt(i) - key);
+            decrypted.append(c);
         }
         
         return decrypted;
