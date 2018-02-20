@@ -21,7 +21,7 @@ public class ShiftCipher {
         
         for (int i = 0; i < plainText.length(); i++)
         {
-            char c = (char)((int)plainText.charAt(i) + key);
+            char c = (char)(((int)plainText.charAt(i) + key - 30) % 94 + 30);
             encrypted.append(c);
         }
         
@@ -35,7 +35,7 @@ public class ShiftCipher {
         
         for (int i = 0; i < cipherText.length(); i++)
         {
-            char c = (char)((int)cipherText.charAt(i) - key);
+            char c = (char)(((int)cipherText.charAt(i) + (94 - key) - 30) % 94 + 30);
             decrypted.append(c);
         }
         

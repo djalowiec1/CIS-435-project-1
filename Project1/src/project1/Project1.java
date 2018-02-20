@@ -18,10 +18,10 @@ public class Project1 {
     public static void main(String[] args) {
         //Shift Cipher Test
         ShiftCipher code = new ShiftCipher();
-        String plainMessage = "Hello World";
+        String plainMessage = "Hello World!";
         String cipherMessage;
         String decodedMessage;
-        int key = 5;
+        int key = 100;
         
         System.out.println("Message: " + plainMessage);
         
