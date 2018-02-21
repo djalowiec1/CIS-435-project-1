@@ -17,18 +17,40 @@ public class Project1 {
      */
     public static void main(String[] args) {
         //Shift Cipher Test
-        ShiftCipher code = new ShiftCipher();
-        BigInteger plainMessage, cipherMessage, decodedMessage, key;
-        plainMessage = new BigInteger("15");
-        key = new BigInteger("5");
+        ShiftCipher SCcode = new ShiftCipher();
+        BigInteger SCplainMessage, SCcipherMessage, SCdecodedMessage, SCkey;
+        SCplainMessage = new BigInteger("15");
+        SCkey = new BigInteger("5");
         
-        System.out.println("Message: " + plainMessage);
+        //Print out original message and key
+        System.out.println("Message: " + SCplainMessage);
+        System.out.println("Key: " + SCkey);
         
-        cipherMessage = code.encrypt(plainMessage, key);
-        System.out.println("Encrypted Message: " + cipherMessage);
+        //Print out encoded message
+        SCcipherMessage = SCcode.encrypt(SCplainMessage, SCkey);
+        System.out.println("Encrypted Message: " + SCcipherMessage);
         
-        decodedMessage = code.decrypt(cipherMessage, key);
-        System.out.println("Decrypted Message: " + decodedMessage);
+        //Print out decoded message
+        SCdecodedMessage = SCcode.decrypt(SCcipherMessage, SCkey);
+        System.out.println("Decrypted Message: " + SCdecodedMessage);
+        
+        //CBC Test
+        CBC CBCcode = new CBC();
+        BigInteger CBCplainMessage, CBCcipherMessage, CBCdecodedMessage, CBCkey;
+        CBCplainMessage = new BigInteger("010110001110");
+        CBCkey = new BigInteger("010");
+        
+        //Print out original message and key
+        System.out.println("Message: " + CBCplainMessage);
+        System.out.println("Key: " + CBCkey);
+        
+        //Print out encoded message
+        CBCcipherMessage = CBCcode.encrypt(CBCplainMessage, CBCkey);
+        System.out.println("Encrypted Message: " + CBCcipherMessage);
+        
+        //Print out decoded message
+        CBCdecodedMessage = CBCcode.decrypt(CBCcipherMessage, CBCkey);
+        System.out.println("Decrypted Message: " + CBCdecodedMessage);
     }
     
 }
