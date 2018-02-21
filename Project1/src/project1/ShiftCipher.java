@@ -4,42 +4,27 @@
  * and open the template in the editor.
  */
 package project1;
+import java.math.*;
 
 /**
  *
  * @author Emily
  */
 public class ShiftCipher {
-    public String plainText;
-    public String cipherText;
-    public int key;
+    public BigInteger plainText;
+    public BigInteger cipherText;
+    public BigInteger key;
     
-    //Encrypt message
-    public StringBuffer encrypt(String plainText, int key)
+    //Encrypt message: input plaintext message and shift key, output ciphertext message
+    public BigInteger encrypt(BigInteger plainText, BigInteger key)
     {
-        StringBuffer encrypted = new StringBuffer();
-        
-        for (int i = 0; i < plainText.length(); i++)
-        {
-            char c = (char)(((int)plainText.charAt(i) + key - 30) % 94 + 30);
-            encrypted.append(c);
-        }
-        
-        return encrypted;
+        return plainText.add(key);
     }
     
-    //Decrypt message
-    public StringBuffer decrypt(String cipherText, int key)
+    //Decrypt message: input ciphertext message and shift key, output plaintext message
+    public BigInteger decrypt(BigInteger cipherText, BigInteger key)
     {
-        StringBuffer decrypted = new StringBuffer();
-        
-        for (int i = 0; i < cipherText.length(); i++)
-        {
-            char c = (char)(((int)cipherText.charAt(i) + (94 - key) - 30) % 94 + 30);
-            decrypted.append(c);
-        }
-        
-        return decrypted;
+        return cipherText.subtract(key);
     }
     
 }

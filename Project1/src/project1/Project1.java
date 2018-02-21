@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package project1;
-
+import java.math.*;
 /**
  *
  * @author darriusz Jalowiec
@@ -18,20 +18,17 @@ public class Project1 {
     public static void main(String[] args) {
         //Shift Cipher Test
         ShiftCipher code = new ShiftCipher();
-        String plainMessage = "Hello World!";
-        String cipherMessage;
-        String decodedMessage;
-        int key = 100;
+        BigInteger plainMessage, cipherMessage, decodedMessage, key;
+        plainMessage = new BigInteger("15");
+        key = new BigInteger("5");
         
         System.out.println("Message: " + plainMessage);
         
-        cipherMessage = code.encrypt(plainMessage, key).toString();
+        cipherMessage = code.encrypt(plainMessage, key);
         System.out.println("Encrypted Message: " + cipherMessage);
         
-        decodedMessage = code.decrypt(cipherMessage, key).toString();
+        decodedMessage = code.decrypt(cipherMessage, key);
         System.out.println("Decrypted Message: " + decodedMessage);
-        
-        
     }
     
 }
