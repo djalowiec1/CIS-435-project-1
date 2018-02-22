@@ -51,6 +51,16 @@ public class Project1 {
         //Print out decoded message
         CBCdecodedMessage = CBCcode.decrypt(CBCcipherMessage, CBCkey);
         System.out.println("Decrypted Message: " + CBCdecodedMessage);
+        
+        
+        testPoly();
+    }
+        public static void testPoly(){
+        PolyalphabeticCipher test = new PolyalphabeticCipher();
+         BigInteger key = new BigInteger("1234");
+         BigInteger polyMessage = new BigInteger("150011");
+         System.out.println(test.encrypt(polyMessage, key));
+
     }
     
 }
