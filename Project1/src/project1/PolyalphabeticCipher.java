@@ -24,21 +24,17 @@ public class PolyalphabeticCipher {
 
     
     public BigInteger encrypt (BigInteger plainText, BigInteger key){
-        System.out.println(plainText);
         int[] keys = getArr(key);
         m1 = keys[0];
         m2 = keys[1];
         m3 = keys[2];
         m4 = keys[3];
-        System.out.println(m2);
         int[] numbers1 = getArr(plainText); 
         int[] numbers2 = new int[4];
         int[] numbers = new int[numbers1.length + numbers2.length];
         System.arraycopy(numbers1, 0, numbers, 0, numbers1.length);
         System.arraycopy(numbers2, 0, numbers, numbers1.length, numbers2.length);
-        List<Integer> intList = getList(numbers);
         int[] resultArr = new int[numbers.length];
-        System.out.println(Arrays.toString(numbers)); 
         for(int postion = 0; postion < numbers.length - 4  ; postion+=4) {
                   resultArr[postion] = numbers[postion] + m1;
                   resultArr[postion + 1] = numbers[postion + 1] + m2;
@@ -53,8 +49,30 @@ public class PolyalphabeticCipher {
         return toBigInteger(finalArr);
     }
     
-    public void decrypt (BigInteger encrypted,  BigInteger key){
-        
+    public BigInteger decrypt (BigInteger encrypted,  BigInteger key){
+        int[] keys = getArr(key);
+        m1 = keys[0];
+        m2 = keys[1];
+        m3 = keys[2];
+        m4 = keys[3];
+        int[] numbers1 = getArr(encrypted); 
+        int[] numbers2 = new int[4];
+        int[] numbers = new int[numbers1.length + numbers2.length];
+        System.arraycopy(numbers1, 0, numbers, 0, numbers1.length);
+        System.arraycopy(numbers2, 0, numbers, numbers1.length, numbers2.length);
+        int[] resultArr = new int[numbers.length];
+        for(int postion = 0; postion < numbers.length - 4  ; postion+=4) {
+                  resultArr[postion] = numbers[postion] - m1;
+                  resultArr[postion + 1] = numbers[postion + 1] - m2;
+                  resultArr[postion + 2] = numbers[postion + 2] - m3;
+                  resultArr[postion + 3] = numbers[postion + 3] - m4;
+                  
+                    
+        }
+        int[] finalArr = new int[numbers1.length];
+        System.arraycopy(resultArr, 0, finalArr, 0, numbers1.length); 
+
+        return toBigInteger(finalArr);
     }
     
     private int[] getArr(BigInteger num){
@@ -65,14 +83,6 @@ public class PolyalphabeticCipher {
         }
         return ints;
 }
-    private List<Integer> getList(int[] x){
-           List<Integer> intList = new ArrayList<Integer>();
-            for (int i : x)
-            {
-            intList.add(i);
-            }
-        return intList;
-    }
     private BigInteger toBigInteger(int[] data) {
         String p = "";
         for(int current = 0; current < data.length; current++){

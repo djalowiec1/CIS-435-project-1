@@ -4,18 +4,16 @@
  * and open the template in the editor.
  */
 package project1;
-import java.math.*;
+
+import java.math.BigInteger;
+
 /**
  *
- * @author darriusz Jalowiec
- * CIS 435
+ * @author darek
  */
-public class Project1 {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
+public class project1 {
+    public static void main(String[] args){
+         /*
         //Shift Cipher Test
         ShiftCipher SCcode = new ShiftCipher();
         BigInteger SCplainMessage, SCcipherMessage, SCdecodedMessage, SCkey;
@@ -53,14 +51,21 @@ public class Project1 {
         System.out.println("Decrypted Message: " + CBCdecodedMessage);
         
         
+       
+    */
         testPoly();
     }
+    
         public static void testPoly(){
-        PolyalphabeticCipher test = new PolyalphabeticCipher();
-         BigInteger key = new BigInteger("1234");
-         BigInteger polyMessage = new BigInteger("150011");
-         System.out.println(test.encrypt(polyMessage, key));
-
-    }
+            PolyalphabeticCipher test = new PolyalphabeticCipher();
+            BigInteger key = new BigInteger("1234");
+            BigInteger polyMessage = new BigInteger("150011");
+            System.out.println("Orginal Mesaage: " +polyMessage);
+            BigInteger result = test.encrypt(polyMessage, key);
+            System.out.println("Encrypted Message: " + result);
+            System.out.println("Decrypted Message: "  + test.decrypt(result, key));
+    
+        }
+    
     
 }
