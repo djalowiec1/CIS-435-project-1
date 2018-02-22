@@ -53,7 +53,7 @@ public class project1 {
         
        
     */
-        testPoly();
+        testMAC();
     }
     
         public static void testPoly(){
@@ -65,6 +65,17 @@ public class project1 {
             System.out.println("Encrypted Message: " + result);
             System.out.println("Decrypted Message: "  + test.decrypt(result, key));
     
+        }
+        public static void testMAC(){
+            MacCipher test = new MacCipher();
+            BigInteger plain = new BigInteger("15015");
+            BigInteger secret = new BigInteger("2");
+            test.encrypt(plain, secret);
+            BigInteger result = test.encrypt(plain, secret);
+            System.out.println("Encrypted Message: " + result);
+            Boolean check = test.decrypt(result, secret);
+            System.out.println("The message was unchanged?: " + check);
+            
         }
     
     
