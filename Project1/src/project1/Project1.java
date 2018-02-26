@@ -72,9 +72,10 @@ public class project1 {
             BigInteger secret = new BigInteger("2");
             test.encrypt(plain, secret);
             BigInteger result = test.encrypt(plain, secret);
+            System.out.println("Orginal Message: " + plain);
             System.out.println("Encrypted Message: " + result);
-            Boolean check = test.decrypt(result, secret);
-            System.out.println("The message was unchanged?: " + check);
+            BigInteger check = test.decrypt(result, secret);
+            System.out.println("Decrypterd Mesaage: " + check);
             
         }
     

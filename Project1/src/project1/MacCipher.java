@@ -37,21 +37,22 @@ public class MacCipher {
         return toBigInteger(resultArr);
         
     }
-     public Boolean decrypt(BigInteger encypted, BigInteger secret){
+     public BigInteger decrypt(BigInteger encypted, BigInteger secret){
         int[] received = getArr(encypted);
        // System.out.println(Arrays.toString(received));
         int hash = received[0];
         System.arraycopy(received, 1, received, 0, received.length - 1);
         received[received.length - 1] = secret.intValue();
         //System.out.println(Arrays.toString(received));
-        BigInteger hashResult = toBigInteger(received);
-        hashResult = hashResult.mod(hashFunc);
+        BigInteger message = toBigInteger(received);
+        BigInteger hashResult = message.mod(hashFunc);
         int newHash = hashResult.intValue();
         //System.out.println(newHash);
+        BigInteger wrong = new BigInteger("1");
         if(hash == newHash)
-            return true;
+            return message;
         else
-            return false;
+            return wrong.negate();
      }
     
     private int[] getArr(BigInteger num){
