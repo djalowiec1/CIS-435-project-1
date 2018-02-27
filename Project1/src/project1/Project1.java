@@ -51,10 +51,11 @@ public class Project1 {
             //Print out original message and key
             System.out.println("Message: " + CBCplainMessage);
             System.out.println("Key: " + CBCkey);
+            System.out.println("Expected Encrypted Message: 45");
             
             //Print out encoded message
             CBCcipherMessage = CBCcode.encrypt(CBCplainMessage, CBCkey);
-            System.out.println("Encrypted Message: " + CBCcipherMessage);
+            System.out.println("Actual Encrypted Message: " + CBCcipherMessage);
             
             //Print out decoded message
             CBCdecodedMessage = CBCcode.decrypt(CBCcipherMessage, CBCkey);

@@ -5,6 +5,7 @@
  */
 package project1;
 import java.math.*;
+import java.lang.*;
 
 /**
  *
@@ -23,18 +24,20 @@ public class CBC {
     public BigInteger encrypt(BigInteger plainText, BigInteger eIV)
     {
         createKey();
-        BigInteger encryptedText = plainText;
-        String strText = plainText.toString();
-        BigInteger result = new BigInteger("0");
+        StringBuffer strText = new StringBuffer();
+        Long tempL;
+        String tempS;
+        BigInteger result;
         String index = plainText.toString();
         int n = index.length();
-        System.out.println("Length of message: " + n);
         
         //Iterate through every digit in the number
         for(int i = 0; i<n; i++)
         {
             //Isolate digit from number
             BigInteger digit = BigInteger.valueOf(index.charAt(i));
+            System.out.println("Isolated Character: " + index.charAt(i));
+            System.out.println("Isolated Digit: " + digit);
             //block xor eIV
             digit = digit.xor(eIV);
             //use key on block
@@ -42,8 +45,13 @@ public class CBC {
             //eIV = block
             eIV = digit;
             //Add digit to result
-            
+            strText.append(digit.toString());
         }
+        
+        //convert StringBuffer to BigInteger
+        tempS = strText.toString();
+        tempL = Long.valueOf(tempS);
+        result = BigInteger.valueOf(tempL);
         
         return result;
     }
@@ -52,29 +60,34 @@ public class CBC {
     public BigInteger decrypt(BigInteger cipherText, BigInteger dIV)
     {
         createKey();
-        BigInteger decryptedText = cipherText;
-        BigInteger result = new BigInteger("0");
-        String index = plainText.toString();
+        StringBuffer strText = new StringBuffer();
+        Long tempL;
+        String tempS;
+        BigInteger result;
+        String index = cipherText.toString();
         int n = index.length();
         
         //Iterate through every digit in the number
         for(int i = 0; i<n; i++)
         {
             //Isolate digit from number
-            BigInteger digit = decryptedText.shiftLeft((n - i) - 1);
+            BigInteger digit = BigInteger.valueOf(index.charAt(i));
             //nextdIV = block
             nextdIV = digit;
-            //use key on block here
+            //use key on block
             digit = dkey[digit.intValue()];
-            //block xor dIV here
+            //block xor dIV
             digit = digit.xor(dIV);
-            //shift digit back to original position
-            digit = digit.shiftRight((n + i) + 1);
             //Add digit to result
-            result = result.add(digit);
+            strText.append(digit.toString());
             //set next dIV
             dIV = nextdIV;
         }
+        
+        //convert StringBuffer to BigInteger
+        tempS = strText.toString();
+        tempL = Long.valueOf(tempS);
+        result = BigInteger.valueOf(tempL);
         
         return result;
     }
