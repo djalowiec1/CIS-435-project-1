@@ -11,7 +11,7 @@ import java.math.BigInteger;
  *
  * @author darek
  */
-public class project1 {
+public class Project1 {
     public static void main(String[] args){
          /*
         //Shift Cipher Test
