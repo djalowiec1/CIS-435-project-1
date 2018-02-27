@@ -11,18 +11,41 @@ import java.math.*;
  * @author Emily
  */
 public class CBC {
-    public BigInteger key;
-    public int blockLength;
+    public BigInteger eIV;
+    public BigInteger dIV;
     public BigInteger plainText;
     public BigInteger cipherText;
     
-    //Encrypts 
-    public BigInteger encrypt(BigInteger plainText, BigInteger key)
+    //Encrypt message: input plaintext message and IV, output ciphertext message
+    public BigInteger encrypt(BigInteger plainText, BigInteger eIV)
     {
-        return plainText;
+        BigInteger encryptedText = plainText;
+        
+        //Stand in for loop
+        for(int i = 0; i<10; i++)
+        {
+            //block xor eIV here
+            //use key on block here
+            //eIV = block
+        }
+        
+        return encryptedText;
     }
-    public BigInteger decrypt(BigInteger cipherText, BigInteger key)
+    
+    //Decrypt message: input ciphertext message and IV, output plaintext message
+    public BigInteger decrypt(BigInteger cipherText, BigInteger dIV)
     {
-        return cipherText;
+        BigInteger decryptedText = cipherText;
+        
+        //Stand in for loop
+        for(int i = 0; i<10; i++)
+        {
+            //nextdIV = block
+            //use key on block here
+            //block xor dIV here
+            //dIV = nextdIV
+        }
+        
+        return decryptedText;
     }
 }
