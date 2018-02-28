@@ -14,9 +14,9 @@ import java.math.BigInteger;
 public class Project1 {
     public static void main(String[] args){
         
-        //testShiftCipher() functional
-        testCBC();
-        //testPoly
+        //testShiftCipher(); functional
+        //testCBC(); functional
+        //testPoly();
         //testMAC();
     }
     
