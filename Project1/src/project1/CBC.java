@@ -25,33 +25,34 @@ public class CBC {
     {
         createKey();
         StringBuffer strText = new StringBuffer();
-        Long tempL;
-        String tempS;
         BigInteger result;
         String index = plainText.toString();
         int n = index.length();
         
+        System.out.println("Encryption:");
+        System.out.println("-------------------");
         //Iterate through every digit in the number
         for(int i = 0; i<n; i++)
         {
-            //Isolate digit from number
-            BigInteger digit = BigInteger.valueOf(index.charAt(i));
-            System.out.println("Isolated Character: " + index.charAt(i));
-            System.out.println("Isolated Digit: " + digit);
+            //Isolate digit from number via lots of conversions
+            BigInteger digit = BigInteger.valueOf(Long.valueOf(String.valueOf(index.charAt(i))));
+            System.out.println("Block: " + digit);
             //block xor eIV
             digit = digit.xor(eIV);
+            System.out.println("Digit xor IV = " + digit);
             //use key on block
-            digit = ekey[digit.intValue()];//out of bounds error
+            digit = ekey[digit.intValue()];
+            System.out.println("Digit + key = " + digit);
             //eIV = block
+            System.out.println("Update IV from: " + eIV + " to " + digit);
             eIV = digit;
             //Add digit to result
             strText.append(digit.toString());
+            System.out.println(". . . . . . . .");
         }
         
         //convert StringBuffer to BigInteger
-        tempS = strText.toString();
-        tempL = Long.valueOf(tempS);
-        result = BigInteger.valueOf(tempL);
+        result = BigInteger.valueOf(Long.valueOf(strText.toString()));
         
         return result;
     }
@@ -61,33 +62,36 @@ public class CBC {
     {
         createKey();
         StringBuffer strText = new StringBuffer();
-        Long tempL;
-        String tempS;
         BigInteger result;
         String index = cipherText.toString();
         int n = index.length();
         
+        System.out.println("Decryption:");
+        System.out.println("-------------------");
         //Iterate through every digit in the number
         for(int i = 0; i<n; i++)
         {
-            //Isolate digit from number
-            BigInteger digit = BigInteger.valueOf(index.charAt(i));
+            //Isolate digit from number via lots of conversions
+            BigInteger digit = BigInteger.valueOf(Long.valueOf(String.valueOf(index.charAt(i))));
+            System.out.println("Block: " + digit);
             //nextdIV = block
             nextdIV = digit;
             //use key on block
-            digit = dkey[digit.intValue()];
+            digit = dkey[digit.intValue()];//out of bounds error
+            System.out.println("Digit + key = " + digit);
             //block xor dIV
             digit = digit.xor(dIV);
+            System.out.println("Digit xor IV = " + digit);
             //Add digit to result
             strText.append(digit.toString());
             //set next dIV
+            System.out.println("Update IV from: " + dIV + " to " + nextdIV);
             dIV = nextdIV;
+            System.out.println(". . . . . . . .");
         }
         
         //convert StringBuffer to BigInteger
-        tempS = strText.toString();
-        tempL = Long.valueOf(tempS);
-        result = BigInteger.valueOf(tempL);
+        result = BigInteger.valueOf(Long.valueOf(strText.toString()));
         
         return result;
     }

@@ -45,13 +45,13 @@ public class Project1 {
         {
             CBC CBCcode = new CBC();
             BigInteger CBCplainMessage, CBCcipherMessage, CBCdecodedMessage, CBCkey;
-            CBCplainMessage = new BigInteger("23");
-            CBCkey = new BigInteger("5");
+            CBCplainMessage = new BigInteger("555");
+            CBCkey = new BigInteger("2");//Can only be a single digit
             
             //Print out original message and key
-            System.out.println("Message: " + CBCplainMessage);
-            System.out.println("Key: " + CBCkey);
-            System.out.println("Expected Encrypted Message: 45");
+            System.out.println("Original Message: " + CBCplainMessage);
+            System.out.println("IV: " + CBCkey);
+            System.out.println("Expected Encrypted Message: 130");
             
             //Print out encoded message
             CBCcipherMessage = CBCcode.encrypt(CBCplainMessage, CBCkey);
