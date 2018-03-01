@@ -18,10 +18,11 @@ public class Project1 {
         //testCBC(); functional
         //testPoly();
         //testMAC();
+        //testRSA();
+        //testDigitalSignature();
     }
     
-        public static void testShiftCipher()
-        {
+        public static void testShiftCipher(){
             //Shift Cipher Test
             ShiftCipher SCcode = new ShiftCipher();
             BigInteger SCplainMessage, SCcipherMessage, SCdecodedMessage, SCkey;
@@ -41,8 +42,7 @@ public class Project1 {
             System.out.println("Decrypted Message: " + SCdecodedMessage);
         }
         
-        public static void testCBC()
-        {
+        public static void testCBC(){
             CBC CBCcode = new CBC();
             BigInteger CBCplainMessage, CBCcipherMessage, CBCdecodedMessage, CBCkey;
             CBCplainMessage = new BigInteger("555");
@@ -85,6 +85,66 @@ public class Project1 {
             System.out.println("Decrypterd Mesaage: " + check);
             
         }
-    
-    
+        
+        //DS TEC
+        public static void testDigitalSignature(){
+            //Creates DS and RSA
+            DigitalSignature testDS = new DigitalSignature();
+            RSA testRSA = new RSA();
+            
+            //Generate new Keys
+            testRSA.genKeys();
+            BigInteger[] PrivKey = testRSA.getPrivateKey();
+            BigInteger[] PubKey = testRSA.getPublicKey(); 
+            System.out.println("--TESTING DIGITAL SIGNATURE--");
+            System.out.println("KEYS USED, MESSAGE TO BE SENT: ");
+            System.out.println("Private Key n: " + PrivKey[0]);
+            System.out.println("Private Key e: " + PrivKey[1]);
+            System.out.println("Public Key n: " + PubKey[0]);
+            System.out.println("Public Key d: " + PubKey[1]);
+            
+            //Sample Message
+            BigInteger testMessage = new BigInteger("12");
+            System.out.println("Unmodified Original Message: " + testMessage);
+            
+            //Create Message and encrypted message Digest
+            BigInteger[] msgAndEncryptedMsg = new BigInteger[2];
+            msgAndEncryptedMsg = testDS.sign(testMessage, PrivKey);
+            System.out.println("\nCONCATENATION: \nOriginal Message: " + msgAndEncryptedMsg[0] + "\nSigned and Hashed Message: " + msgAndEncryptedMsg[1]);
+            
+            //Compare Message digest with decrypted encrypted message digest
+            boolean same;
+            same = testDS.verifyDS(msgAndEncryptedMsg[0], msgAndEncryptedMsg[1], PubKey);
+            System.out.println("\nVERIFICATION: " + same);
+        }
+        
+        //RSA TEC 
+        public static void testRSA(){
+            RSA testRSA = new RSA();
+            
+            //Generate new Keys
+            testRSA.genKeys();
+            BigInteger[] PrivKey = testRSA.getPrivateKey();
+            BigInteger[] PubKey = testRSA.getPublicKey(); 
+            System.out.println("--TESTING RSA--");
+            System.out.println("KEYS GENERATED WITH RSA: ");
+            System.out.println("Private Key n: " + PrivKey[0]);
+            System.out.println("Private Key e: " + PrivKey[1]);
+            System.out.println("Public Key n: " + PubKey[0]);
+            System.out.println("Public Key d: " + PubKey[1]);
+            
+            //Create Message to Encrypt
+            BigInteger testMessage = new BigInteger("14");
+            System.out.println("Original Message: " + testMessage);
+            
+            //Test Encrypt()
+            BigInteger cipher;
+            cipher = testRSA.encrypt(testMessage, PubKey);
+            System.out.println("Encrypted Message using Public Key: " + cipher);             
+            
+            //Test Decrypt()
+            BigInteger message;
+            message = testRSA.decrypt(cipher, PrivKey);
+            System.out.println("Decrypted Message using cipher and Private Key: " + message + "\n"); 
+        }    
 }
