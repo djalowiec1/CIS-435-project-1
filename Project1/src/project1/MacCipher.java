@@ -10,11 +10,11 @@ import java.math.*;
 import java.util.Arrays;
 
 /**
- *The mac cipher encrypt takes the plain text adds the secret to last postion, then the result is hashed using 
- mod 12. Then the plaintext with the hash added to the front is send
- The mac cipher decrypt takes the encrupted message, extracts location one to get the hash, then the rest is
- is combined with the secret, then that is hashed. The hash from pstion 0 and the new hash are compared,
- if the result is the same nothing was changed and plaintext is send. If they are diffrent  -1 is send. 
+ *The mac cipher encrypt takes the plain text adds the secret to last position, then the result is hashed using 
+ mod 12. Then the plaintext with the hash added to the front is sent
+ The mac cipher decrypt takes the encrypted message, extracts location one to get the hash, then the rest is
+ is combined with the secret, then that is hashed. The hash from position 0 and the new hash are compared,
+ if the result is the same nothing was changed and plaintext is send. If they are different  -1 is sent. 
 * @author <Dariusz Jalowiec>
 * @date <2/28/2018>
  */

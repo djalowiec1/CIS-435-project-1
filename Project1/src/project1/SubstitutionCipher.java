@@ -1,4 +1,4 @@
-package cs435;
+package project1;
 
 import java.math.*;
 import java.util.Random;

@@ -7,8 +7,8 @@
 * then pieces the digits back together into one message, converts it back into 
 * Big Integer, then returns the result.
 *
-* @author Clay Klinedinst
-* @date 2/28/2018
+* @author <Clay Klinedinst>
+* @date <2/28/2018>
 */
 
 package project1;
