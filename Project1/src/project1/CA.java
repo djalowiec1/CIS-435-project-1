@@ -6,7 +6,7 @@
  */
 
 
-package cipher;
+package project1;
 import java.math.*;
 public class CA {
 
@@ -37,7 +37,6 @@ public class CA {
 		
 
 		int p = ID.intValue();
-		System.out.println(p);
 		for (int x=0;x<people.length;x++) {
 			if (people[p].equals(Key)) {
 				result = true;

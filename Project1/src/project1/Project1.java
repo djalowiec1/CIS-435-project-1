@@ -239,7 +239,12 @@ public class Project1 {
             System.out.println("TESTING CERTIFICATE AUTHORITY");
             System.out.println("------------------------------------");
             
-            //code
+            BigInteger key,ID;
+            ID = BigInteger.ONE;
+            key = new BigInteger("45");
+            CA test = new CA();
+            boolean result = test.certify(ID,key);
+            System.out.println("The CA authority has the key inside it?: " + result);
             
             System.out.println("------------------------------------ \n");
         }
