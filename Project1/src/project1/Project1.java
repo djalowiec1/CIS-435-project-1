@@ -172,4 +172,30 @@ public class Project1 {
             message = testRSA.decrypt(cipher, PrivKey);
             System.out.println("Decrypted Message using cipher and Private Key: " + message + "\n"); 
         }    
+    
+        //Substitution Cipher test
+    	public static void testSubstitutionCipher() {
+		// Substitution Cipher Test
+		
+		SubstitutionCipher test = new SubstitutionCipher();
+		BigInteger message, key, encrypted, decrypted;
+		message = new BigInteger("457836");
+		key = new BigInteger("7894561230");
+		
+		//Print out Message and Key
+		System.out.println("Message = " + message);
+		System.out.println("Key = " + key);
+		
+		//Encrypt Message
+		encrypted = test.encrypt(message, key);
+		System.out.println("Encrypted Message = " + encrypted);
+		
+		//Decrypt Message
+		decrypted = test.decrypt(encrypted, key);
+		System.out.println("Decrypted Message = " + decrypted);;
+		
+        }
+		
+		
+	
 }
