@@ -1,15 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+* <p>This cipher takes a BigInteger as input, then uses a set mapping to 
+* encrypt and decrypt the message. It contains createKey(), encrypt(), and 
+* decrypt() methods. CreateKey() populates the mapping arrays. Encrypt() and 
+* decrypt() converts the BigInteger input into a String, breaks it into 
+* individual digits, encrypts/decrypts the digits according to the mapping, 
+* then pieces the digits back together into one message, converts it back into 
+* Big Integer, then returns the result.
+*
+* @author Clay Klinedinst
+* @date 2/28/2018
+*/
+
 package project1;
 import java.math.*;
-        
-/**
- *
- * @author cklin
- */
+
 public class BlockCipher 
 {
     BigInteger[] ekey = new BigInteger[10];
