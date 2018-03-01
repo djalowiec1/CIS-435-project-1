@@ -1,15 +1,12 @@
 /*
  * This class signs a message with a private key, encrypting it.
  * It also decrypts a message with a public key.
- * Additionally,
+ *
+ *  @author <Tom Callahan>  
+ *  @date <2/26/2018>
  */
 package project1;
 
-/**
- *
- * @author <Tom Callahan>
-* @date <2/26/2018>
- */
 import java.math.BigInteger;
 import java.util.Random;
 

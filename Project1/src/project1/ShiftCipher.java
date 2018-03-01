@@ -1,11 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package project1;
-import java.math.*;
-
 /**
  * This class is the implementation of the Shift cipher
  * 
@@ -24,6 +16,10 @@ import java.math.*;
  * @author Emily
  * @date 2/20/18
  */
+
+package project1;
+import java.math.*;
+
 public class ShiftCipher {
     public BigInteger plainText;
     public BigInteger cipherText;

@@ -1,12 +1,3 @@
-
-package project1;
-import java.math.*;
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /**
 *This class is the implementation of the Polyalphabetic cipher, the encrypt function recives the  
 *
@@ -16,6 +7,15 @@ import java.util.List;
 * @author <Dariusz Jalowiec>
 * @date <2/21/2018>
  */
+
+package project1;
+import java.math.*;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class PolyalphabeticCipher {
     //these peivate variables are the standard shift 
     private int n; 
