@@ -5,7 +5,8 @@
  */
 package project1;
 import java.math.*;
-
+import java.util.*;
+        
 /**
  *
  * @author cklin
@@ -46,16 +47,30 @@ public class BlockCipher
     public BigInteger encrypt(BigInteger plaintext, BigInteger[] map)
     {
         BigInteger ciphertext = new BigInteger("1");
+        String output = "";
         
-        plaintext.toString();
+        String text = plaintext.toString();
         
+        int[] numbers = new int[text.length()];
         
+        Scanner s = new Scanner(text);
+        for(int i = 0; i < text.length(); i++)
+        {
+            String a = s.next();
+            numbers[i] = Integer.parseInt(a);
+        }
         
+        for(int i = 0; i < numbers.length; i++)
+        {
+            numbers[i] = map[numbers[i]].intValue();
+        }
+        
+        for(int i = 0; i < numbers.length; i++)
+        {
+            output += numbers[i];
+        }
         
         return ciphertext;
     }
-    
-    
-    
   
 }
