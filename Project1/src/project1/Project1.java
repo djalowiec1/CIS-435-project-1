@@ -107,7 +107,7 @@ public class Project1 {
             System.out.println("Orginal Message: " + plain);
             System.out.println("Encrypted Message: " + result);
             BigInteger check = test.decrypt(result, secret);
-            System.out.println("Decrypterd Mesaage: " + check);
+            System.out.println("Decrypted Mesaage: " + check);
             
         }
         
