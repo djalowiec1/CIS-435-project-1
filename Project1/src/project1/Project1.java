@@ -17,8 +17,8 @@ public class Project1 {
         //testShiftCipher(); functional
         //testBlockCipher(); functional
         //testCBC(); functional
-        //testPoly();
-        //testMAC();
+        //testPoly(); //functional
+        //testMAC();functional
         //testRSA();
         //testDigitalSignature();
     }
@@ -85,6 +85,7 @@ public class Project1 {
         }
         
         public static void testPoly(){
+            System.out.println("TESTING POLYALPHABETIC");
             PolyalphabeticCipher test = new PolyalphabeticCipher();
             BigInteger key = new BigInteger("1234");
             BigInteger polyMessage = new BigInteger("150011");
@@ -96,11 +97,13 @@ public class Project1 {
         }
         
         public static void testMAC(){
+            System.out.println("TESTING MAC");
             MacCipher test = new MacCipher();
             BigInteger plain = new BigInteger("15015");
             BigInteger secret = new BigInteger("2");
             test.encrypt(plain, secret);
             BigInteger result = test.encrypt(plain, secret);
+             System.out.println("Secret Used: " + secret);
             System.out.println("Orginal Message: " + plain);
             System.out.println("Encrypted Message: " + result);
             BigInteger check = test.decrypt(result, secret);
