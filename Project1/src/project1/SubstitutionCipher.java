@@ -1,3 +1,12 @@
+/*
+*This class inputs a biginteger message and key then uses the key to ecrypt and decrypt the message 
+*It contains a encrypt and decrypt method as well as a key randomizer.
+*
+*@author<Cameoron Conklin>
+*@date<2/28/2018>
+*
+*/
+
 package project1;
 
 import java.math.*;
