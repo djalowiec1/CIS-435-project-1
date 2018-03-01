@@ -5,7 +5,6 @@
  */
 package project1;
 import java.math.*;
-import java.util.*;
         
 /**
  *
@@ -18,9 +17,7 @@ public class BlockCipher
     
     public void createKey()
     {
-        BigInteger[] ekey = new BigInteger[10];
-        BigInteger[] dkey = new BigInteger[10];
-        
+        //populates the encryption and decryption key with the map values
         ekey[0] = BigInteger.valueOf(6);
         ekey[1] = BigInteger.valueOf(7);
         ekey[2] = BigInteger.valueOf(5);
@@ -44,33 +41,62 @@ public class BlockCipher
         dkey[8] = BigInteger.valueOf(9);
     }
     
-    public BigInteger encrypt(BigInteger plaintext, BigInteger[] map)
+    public BigInteger encrypt(BigInteger plaintext)
     {
-        BigInteger ciphertext = new BigInteger("1");
-        String output = "";
+        BigInteger ciphertext;
+        String digit, encryptedDigit, output = "";
+        //populate the mapping arrays so the key can be used in the function
+        createKey();
         
+        //convert the BigInteger plaintext to String
         String text = plaintext.toString();
         
-        int[] numbers = new int[text.length()];
-        
-        Scanner s = new Scanner(text);
+        //loop through each char in the String to convert one digit at a time
         for(int i = 0; i < text.length(); i++)
         {
-            String a = s.next();
-            numbers[i] = Integer.parseInt(a);
+            //get the next "digit" in the plaintext
+            digit = String.valueOf(text.charAt(i));
+            /* convert digit to integer, use that to find the mapping for
+            encryption using ekey, then set the String representation of that
+            number as the encrypted digit*/
+            encryptedDigit = ekey[Integer.parseInt(digit)].toString();
+            //add the encryptedDigit to the output of the cipher
+            output += encryptedDigit;
         }
         
-        for(int i = 0; i < numbers.length; i++)
-        {
-            numbers[i] = map[numbers[i]].intValue();
-        }
-        
-        for(int i = 0; i < numbers.length; i++)
-        {
-            output += numbers[i];
-        }
+        //convert the cipher output into BigInteger for returning
+        ciphertext = new BigInteger(output);
         
         return ciphertext;
+    }
+    
+     public BigInteger decrypt(BigInteger ciphertext)
+    {
+        BigInteger plaintext;
+        String digit, decryptedDigit, output = "";
+        //populate the mapping arrays so the key can be used in the function
+        createKey();
+        
+        //convert the BigInteger ciphertext to String
+        String text = ciphertext.toString();
+        
+        //loop through each char in the String to convert one digit at a time
+        for(int i = 0; i < text.length(); i++)
+        {
+            //get the next "digit" in the ciphertext
+            digit = String.valueOf(text.charAt(i));
+            /* convert digit to integer, use that to find the mapping for
+            decryption using dkey, then set the String representation of that
+            number as the decrypted digit*/
+            decryptedDigit = dkey[Integer.parseInt(digit)].toString();
+            //add the decryptedDigit to the output
+            output += decryptedDigit;
+        }
+       
+        //convert the output into BigInteger for returning
+        plaintext = new BigInteger(output);
+        
+        return plaintext;
     }
   
 }

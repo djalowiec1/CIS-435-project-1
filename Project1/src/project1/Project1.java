@@ -15,6 +15,7 @@ public class Project1 {
     public static void main(String[] args){
         
         //testShiftCipher(); functional
+        //testBlockCipher(); functional
         //testCBC(); functional
         //testPoly();
         //testMAC();
@@ -41,6 +42,27 @@ public class Project1 {
             SCdecodedMessage = SCcode.decrypt(SCcipherMessage, SCkey);
             System.out.println("Decrypted Message: " + SCdecodedMessage);
         }
+        
+        public static void testBlockCipher()
+        {
+            //Block Cipher Test
+            BlockCipher BCcode = new BlockCipher();
+            BigInteger BCplainMessage, BCcipherMessage, BCdecodedMessage;
+            BCplainMessage = new BigInteger("1234567890");
+            
+            //Print out original message and expected encrypted message
+            System.out.println("Original Messaage: " + BCplainMessage);
+            System.out.println("Expected Encrypted Message: 7543201986");
+            
+            //Encrypt message and print out result
+            BCcipherMessage = BCcode.encrypt(BCplainMessage);
+            System.out.println("Encrypted Message: " + BCcipherMessage);
+            
+            //Decrypt message and print out result
+            BCdecodedMessage = BCcode.decrypt(BCcipherMessage);
+            System.out.println("Decrypted Message: " + BCdecodedMessage);
+        }
+
         
         public static void testCBC(){
             CBC CBCcode = new CBC();
