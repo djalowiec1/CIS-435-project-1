@@ -10,51 +10,59 @@ import java.math.*;
 import java.util.Arrays;
 
 /**
- *
- * @author Dariusz Jalowiec
+ *The mac cipher encrypt takes the plain text adds the secret to last postion, then the result is hashed using 
+ mod 12. Then the plaintext with the hash added to the front is send
+ The mac cipher decrypt takes the encrupted message, extracts location one to get the hash, then the rest is
+ is combined with the secret, then that is hashed. The hash from pstion 0 and the new hash are compared,
+ if the result is the same nothing was changed and plaintext is send. If they are diffrent  -1 is send. 
+* @author <Dariusz Jalowiec>
+* @date <2/28/2018>
  */
 public class MacCipher {
      BigInteger hashFunc = new BigInteger("12");
     
     public BigInteger encrypt(BigInteger plainText, BigInteger secret){
-
+        //create an int arrray from the plaintext
         int[] numbers = getArr(plainText); 
         int s = secret.intValue();
-        //System.out.println(Arrays.toString(numbers));
+        //create an array one size bigger then orginal to add secret
         int[] resultArr = new int[numbers.length + 1];
         resultArr= Arrays.copyOf(numbers, numbers.length + 1 );
+        //secret is added to back
         resultArr[numbers.length] = s;
-        //System.out.println(Arrays.toString(resultArr));
+        //the int array is converted back to bigInt and then it is hashed
         BigInteger hashResult = toBigInteger(resultArr);
         hashResult = hashResult.mod(hashFunc);
         int result = hashResult.intValue();
-        //System.out.println(result);
+        //the hash result is added to the front of the new array, everything else is shifted right 
         for( int index = resultArr.length-2; index >= 0 ; index-- ){
             resultArr[index+1] = resultArr [index];
         }
         resultArr[0] = result;
-        //System.out.println(Arrays.toString(resultArr));
+        //final array converted back to bigint and send
         return toBigInteger(resultArr);
         
     }
      public BigInteger decrypt(BigInteger encypted, BigInteger secret){
         int[] received = getArr(encypted);
-       // System.out.println(Arrays.toString(received));
+        //create an int arrray from the encryoted message
+        //get the has out from postion 0
         int hash = received[0];
+        //create a new int array with messsage without hash with secret added to back
         System.arraycopy(received, 1, received, 0, received.length - 1);
         received[received.length - 1] = secret.intValue();
-        //System.out.println(Arrays.toString(received));
+        //hash the new combined bigint
         BigInteger message = toBigInteger(received);
         BigInteger hashResult = message.mod(hashFunc);
         int newHash = hashResult.intValue();
-        //System.out.println(newHash);
+        //compare new hash with old received hash, if sae return message if not -1
         BigInteger wrong = new BigInteger("1");
         if(hash == newHash)
             return message;
         else
             return wrong.negate();
      }
-    
+       //private method to convert bigint into int array
     private int[] getArr(BigInteger num){
         String biStr = num.toString();
         int[] ints = new int[biStr.length()];
@@ -63,6 +71,7 @@ public class MacCipher {
         }
         return ints;
 }
+//private method to convert int array into bigint 
     private BigInteger toBigInteger(int[] data) {
         String p = "";
         for(int current = 0; current < data.length; current++){
