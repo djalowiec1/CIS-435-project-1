@@ -4,6 +4,7 @@
  The mac cipher decrypt takes the encrypted message, extracts location one to get the hash, then the rest is
  is combined with the secret, then that is hashed. The hash from position 0 and the new hash are compared,
  if the result is the same nothing was changed and plaintext is send. If they are different  -1 is sent. 
+ * 
 * @author <Dariusz Jalowiec>
 * @date <2/28/2018>
  */

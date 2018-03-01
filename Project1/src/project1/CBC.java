@@ -17,8 +17,8 @@
  * block result and uses it to update the IV before moving onto the next
  * block until all blocks are decoded.
  * 
- * @author Emily
- * @date 2/27/18
+ * @author <Emily Benson>
+ * @date <2/27/18>
  */
 
 package project1;

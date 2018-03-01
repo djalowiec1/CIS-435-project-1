@@ -5,7 +5,7 @@
 * and Encrypts and Decrypts messages
 
  * @author <Tom Callahan>
-* @date <2/28/2018>
+ * @date <2/28/2018>
  */
 
 package project1;

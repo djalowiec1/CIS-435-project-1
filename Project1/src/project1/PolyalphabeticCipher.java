@@ -1,9 +1,9 @@
 /**
-*This class is the implementation of the Polyalphabetic cipher, the encrypt function recives the  
 *
-* The polyalpapetic enrypt and decrypt deivide the bigint received into an int array, then the int array is individuall
- shifteed by looking at the key, each digit in the key is one diffrent shift, so m1 would be the first digit
+* The Polyalphabetic encrypt and decrypt divides the bigint received into an int array, then the int array is individually
+ shifted by looking at the key, each digit in the key is one different shift, so m1 would be the first digit
  in key
+ * 
 * @author <Dariusz Jalowiec>
 * @date <2/21/2018>
  */

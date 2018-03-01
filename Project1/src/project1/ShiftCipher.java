@@ -13,8 +13,8 @@
  * The decrypt function takes the value of the input message and shifts it by
  * the value of the key in the opposite direction of the encrypt function
  * 
- * @author Emily
- * @date 2/20/18
+ * @author <Emily Benson>
+ * @date <2/20/18>
  */
 
 package project1;
