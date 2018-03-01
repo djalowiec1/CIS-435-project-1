@@ -8,7 +8,24 @@ import java.math.*;
 import java.lang.*;
 
 /**
- *
+ *This class is the implementation of the Chaining Block Cipher
+ * 
+ * The encryption function input is the plaintext message and the Initialization
+ * Vector and the output is the ciphertext message
+ * 
+ * The encrypt function takes each block of the input message and xor IV.
+ * Then it takes the result and applies the encryption key to it. Last
+ * it takes that result and uses it to update the IV before moving onto the next
+ * block until all blocks are encoded.
+ * 
+ * The decryption function input is the ciphertext message and the Initialization
+ * Vector and the output is the plaintext message
+ * 
+ * The decrypt function takes each block of the input message and applies the
+ * key to it. Then it takes the result and xor IV. Last it takes the original
+ * block result and uses it to update the IV before moving onto the next
+ * block until all blocks are decoded.
+ * 
  * @author Emily
  * @date 2/27/18
  */
