@@ -238,17 +238,8 @@ public class Project1 {
             System.out.println("TESTING CERTIFICATE AUTHORITY");
             System.out.println("------------------------------------");
             
-            MacCipher test = new MacCipher();
-            BigInteger plain = new BigInteger("15015");
-            BigInteger secret = new BigInteger("2");
-            test.encrypt(plain, secret);
-            BigInteger result = test.encrypt(plain, secret);
-             System.out.println("Secret Used: " + secret);
-            System.out.println("Orginal Message: " + plain);
-            System.out.println("Encrypted Message: " + result);
-            BigInteger check = test.decrypt(result, secret);
-            System.out.println("Decrypted Mesaage: " + check);
-            System.out.println("------------------------------------ \n");
+            //code
             
+            System.out.println("------------------------------------ \n");
         }
 }
