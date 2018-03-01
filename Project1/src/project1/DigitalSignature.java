@@ -7,7 +7,8 @@ package project1;
 
 /**
  *
- * @author Tom
+ * @author <Tom Callahan>
+* @date <2/26/2018>
  */
 import java.math.BigInteger;
 import java.util.Random;

@@ -1,13 +1,15 @@
 package project1;
 
 /*
-* Tom Callahan
+* 
+
 * RSA - Generates Private and Public keys for users
 * and Encrypts and Decrypts messages
 */
 
 /**
- * @author Tom
+ * @author <Tom Callahan>
+* @date <2/28/2018>
  */
 import java.math.BigInteger;
 import java.util.Random;
