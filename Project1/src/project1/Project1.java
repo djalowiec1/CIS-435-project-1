@@ -21,6 +21,7 @@ public class Project1 {
         testCBC(); //functional
         testMAC(); //functional
         testDigitalSignature(); //functional
+        testCA();
     }
     
         //Shift Cipher Test
