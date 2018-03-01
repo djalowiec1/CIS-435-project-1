@@ -7,8 +7,22 @@ package project1;
 import java.math.*;
 
 /**
- *
+ * This class is the implementation of the Shift cipher
+ * 
+ * The encryption function input is the plaintext message and the shift key and
+ * the output is the ciphertext message
+ * 
+ * The encrypt function takes the value of the input message and shifts it by
+ * the value of the key
+ * 
+ * The decryption function input is the ciphertext message and the shift key and
+ * the output is the plaintext message
+ * 
+ * The decrypt function takes the value of the input message and shifts it by
+ * the value of the key in the opposite direction of the encrypt function
+ * 
  * @author Emily
+ * @date 2/20/18
  */
 public class ShiftCipher {
     public BigInteger plainText;
