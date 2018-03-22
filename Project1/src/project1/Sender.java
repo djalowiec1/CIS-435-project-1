@@ -21,7 +21,7 @@ public class Sender {
       SubstitutionCipher sub = new SubstitutionCipher();
     private BigInteger message;
     private int senderID;
-   
+    int i;
     BigInteger[] packet = new BigInteger[3];
     //Default Message
     public void processMessage(BigInteger m){
@@ -38,7 +38,7 @@ public class Sender {
         
         
        Scanner sc = new Scanner(System.in);
-        int i = sc.nextInt();
+       i = sc.nextInt();
         if(i == 1){
             generateMessage1();
         }
@@ -54,6 +54,10 @@ public class Sender {
         
         
         sendPacketToNetwork();
+    }
+    
+    public int getCombo(){
+        return i;
     }
     
     //ShiftCipher + RSA + MAC + CA

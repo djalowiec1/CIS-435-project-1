@@ -13,7 +13,7 @@ import java.util.Scanner;
  * @author darek
  */
 public class Receiver {
-          BlockCipher block = new BlockCipher();
+       BlockCipher block = new BlockCipher();
       CA ca = new CA();
       CBC cbc = new CBC();
       DigitalSignature dg = new DigitalSignature();
@@ -24,6 +24,7 @@ public class Receiver {
       SubstitutionCipher sub = new SubstitutionCipher();
     private BigInteger message;
     private int senderID;
+    int i;
    
     BigInteger[] packet = new BigInteger[3];
     //Default Message
@@ -51,9 +52,9 @@ public class Receiver {
             return message;
      }
     
-    public void receivePacket(BigInteger[] packet1){
+    public void receivePacket(BigInteger[] packet1, int combo){
         
-        
+        i = combo;
         packet = packet1;
     }
 }
