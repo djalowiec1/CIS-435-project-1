@@ -50,10 +50,24 @@ public class Receiver {
     }
     //CBC + RSA +MAC + CA
       public BigInteger  getMessage2(){
-          return message;
+        BigInteger secret = new BigInteger("2");
+        BigInteger key = new BigInteger("5");
+        BigInteger person = new BigInteger("1");
+        //get the message by decryting the first packet
+        BigInteger receivedMessage = shift.decrypt(packet[0], key);
+        //get the public key by callin CA
+        BigInteger[] publicKey = ca.getKey(person);
+        
+        //decrypt the RSA from orginal message
+         BigInteger rsa1 = rsa.decrypt(publicKey, secret);
+         
+         //decrypt the hash function to see
+         BigIntenger decryptedMessage = 
+         
+        return message;
     }
       //SubstitutionCipher+ RSA + DigitalSignature + CA
-        public BigInteger getMessage3(){
+    public BigInteger getMessage3(){
                return message;
     }
         //polyalabetic + RSA + DigitalSignature + CA
