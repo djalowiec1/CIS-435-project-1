@@ -7,6 +7,7 @@ package project1;
 
 import static java.lang.System.in;
 import java.math.BigInteger;
+import java.util.Scanner;
   
 public class Sender {
       BlockCipher block = new BlockCipher();
@@ -29,9 +30,34 @@ public class Sender {
         for (BigInteger packet1 : packet) {
              System.out.println(packet1);
        }
+        System.out.println("Pick Which combination of Ciphers you want to use?: ");
+        System.out.println("1: ShiftCipher + RSA + MAC + CA?: ");
+        System.out.println("2: CBC + RSA +MAC + CA?: ");
+        System.out.println("3: SubstitutionCipher+ RSA + DigitalSignature + CA?: ");
+        System.out.println("4: polyalabetic + RSA + DigitalSignature + CA?: ");
+        
+        
+       Scanner sc = new Scanner(System.in);
+        int i = sc.nextInt();
+        if(i == 1){
+            generateMessage1();
+        }
+        else if(i == 2){
+            generateMessage2();
+        }
+         else if(i == 3){
+            generateMessage3();
+        }
+        else
+             generateMessage4();
+        
+        
+        
+        sendPacketToNetwork();
     }
     
-    //Creates passed message
+    //ShiftCipher + RSA + MAC + CA
+
     public BigInteger[] generateMessage1(){
           BigInteger secret = new BigInteger("2");
         BigInteger key = new BigInteger("5");
@@ -43,7 +69,8 @@ public class Sender {
         packet[2] = mc.encrypt(result, secret);
         return packet;
     }
-      public BigInteger[]  generateMessage2(BigInteger m){
+    //CBC + RSA +MAC + CA
+      public BigInteger[]  generateMessage2(){
         BigInteger CBCkey = new BigInteger("2");
          BigInteger secret = new BigInteger("2");
 
@@ -55,15 +82,33 @@ public class Sender {
         packet[2] = mc.encrypt(result, secret);
         return packet;
     }
-        public BigInteger generateMessage3(BigInteger m){
+      //SubstitutionCipher+ RSA + DigitalSignature + CA
+        public BigInteger[] generateMessage3(){
         BigInteger secret = new BigInteger("2");
         BigInteger key = new BigInteger("5");
         packet[0] = sub.encrypt(message, key);
         rsa.genKeys();
         BigInteger result = rsa.encrypt(message, rsa.getPublicKey());
         packet[1] = result;
+        BigInteger[] privateKey = rsa.getPrivateKey();
+        BigInteger[] finalone = dg.sign(result, privateKey);
+        packet[2] = finalone[1];
         
-        return message;
+        return packet;
+    }
+        //polyalabetic + RSA + DigitalSignature + CA
+        public BigInteger[] generateMessage4(){
+            BigInteger secret = new BigInteger("2");
+            BigInteger key = new BigInteger("1234");
+            packet[0] = poly.encrypt(message, key);
+            rsa.genKeys();
+            BigInteger result = rsa.encrypt(message, rsa.getPublicKey());
+            packet[1] = result;
+            BigInteger[] privateKey = rsa.getPrivateKey();
+            BigInteger[] finalone = dg.sign(result, privateKey);
+            packet[2] = finalone[1];
+        
+        return packet;
     }
     
     public BigInteger[] sendPacketToNetwork(){
@@ -72,9 +117,7 @@ public class Sender {
         return packet;
     }
 
-    private void each(BigInteger packet1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
     
     
 }
