@@ -15,9 +15,11 @@ public class Network
     BigInteger message;
     int hackedMessage;
     
-    public void getPacketFromSender()
+    public void getPacketFromSender(BigInteger m)
     {
+        message = m;
         packet = sndr.sendPacketToNetwork();
+        
         message = packet[1];
         
     }

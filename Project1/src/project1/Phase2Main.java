@@ -21,7 +21,10 @@ public class Phase2Main {
         Network ntwk = new Network();
         BigInteger m = new BigInteger("15");
         Sender p = new Sender();
-        p.processMessage(m);
+        System.out.println("Combination One");
+        System.out.println("Combination One");
+
+        ntwk.getPacketFromSender(m);
            
     }
 }
