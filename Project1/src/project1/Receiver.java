@@ -29,7 +29,17 @@ public class Receiver {
     BigInteger[] packet = new BigInteger[3];
     //Default Message
     public void processPacket(){
-   
+        if(i ==1){
+            getMessage1();
+        }
+        else if(i ==2){
+            getMessage2();
+         }
+        else if(i ==3){
+            getMessage3();
+        }
+        else
+            getMessage4();
 
     }
     
