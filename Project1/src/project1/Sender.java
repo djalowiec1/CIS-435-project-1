@@ -5,6 +5,7 @@
  */
 package project1;
 
+import static java.lang.System.in;
 import java.math.BigInteger;
   
 public class Sender {
@@ -20,18 +21,26 @@ public class Sender {
     private BigInteger message;
     private int senderID;
    
+    BigInteger[] packet = new BigInteger[3];
     //Default Message
-    public BigInteger generateMessage(){
-        
-        message = new BigInteger("15");
-        return message;
+    public void processMessage(BigInteger m){
+        message = m;
+        generateMessage1();
+        for (BigInteger packet1 : packet) {
+             System.out.println(packet1);
+       }
     }
     
     //Creates passed message
-    public BigInteger generateMessage1(BigInteger m){
-        
-        message = m;
-        return message;
+    public BigInteger[] generateMessage1(){
+          BigInteger secret = new BigInteger("2");
+        BigInteger key = new BigInteger("5");
+        packet[0] = shift.encrypt(message, key);
+        rsa.genKeys();
+        BigInteger result = rsa.encrypt(message, rsa.getPublicKey());
+        packet[1] = result;
+        packet[2] = mc.encrypt(result, secret);
+        return packet;
     }
       public BigInteger generateMessage2(BigInteger m){
         message = m;
@@ -42,10 +51,14 @@ public class Sender {
         return message;
     }
     
-    public BigInteger sendPacketToNetwork(){
+    public BigInteger[] sendPacketToNetwork(){
         
         
-        return message;
+        return packet;
+    }
+
+    private void each(BigInteger packet1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

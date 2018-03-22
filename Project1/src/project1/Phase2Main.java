@@ -5,6 +5,8 @@
  */
 package project1;
 
+import java.math.BigInteger;
+
 /**
  *
  * @author tcallahan
@@ -17,7 +19,9 @@ public class Phase2Main {
         System.out.println("Sender is Created");
 //        Receiver rcvr = new Receiver();
 //        Network ntwk = new Network();
-        
+        BigInteger m = new BigInteger("15");
+        Sender p = new Sender();
+        p.processMessage(m);
            
     }
 }

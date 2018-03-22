@@ -11,19 +11,7 @@ package project1;
 import java.math.BigInteger;
 
 public class Project1 {
-    public static void main(String[] args){
-        
-        testShiftCipher(); //functional
-        testSubstitutionCipher(); //functional
-        testPoly(); //functional
-        testRSA(); //functional
-        testBlockCipher(); //functional
-        testCBC(); //functional
-        testMAC(); //functional
-        testDigitalSignature(); //functional
-        testCA();
-    }
-    
+
         //Shift Cipher Test
         public static void testShiftCipher(){
             //Shift Cipher Test
