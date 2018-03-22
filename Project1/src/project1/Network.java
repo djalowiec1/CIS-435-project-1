@@ -1,14 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package project1;
-
 /**
  *
  * @author cklin
  */
-public class Network {
-    
+
+package project1;
+
+import java.math.BigInteger;
+
+public class Network 
+{
+    private BigInteger message;
+    public BigInteger getPacketFromSender()
+    {
+        
+        return message;
+    }
+    public BigInteger deliverPacketToReceiver()
+    {
+        
+        return message;
+    }
+    public BigInteger packetGetHacked()
+    {
+        
+        return message;
+    }
 }
