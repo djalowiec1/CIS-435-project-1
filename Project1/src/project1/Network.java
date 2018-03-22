@@ -22,7 +22,7 @@ public class Network
         packet = sndr.sendPacketToNetwork(m);
         i = sndr.getCombo();
         message = packet[1];
-        
+        System.out.println(message);
     }
     
     public void deliverPacketToReceiver()
@@ -37,6 +37,7 @@ public class Network
         hackedMessage+=5;
         message = BigInteger.valueOf(hackedMessage);
         packet[1] = message;
+        System.out.println(message);
         return message;
     }
 }
