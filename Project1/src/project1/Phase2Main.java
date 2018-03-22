@@ -18,7 +18,7 @@ public class Phase2Main {
         Sender sndr = new Sender();
         System.out.println("Sender is Created");
 //        Receiver rcvr = new Receiver();
-//        Network ntwk = new Network();
+        Network ntwk = new Network();
         BigInteger m = new BigInteger("15");
         Sender p = new Sender();
         p.processMessage(m);
