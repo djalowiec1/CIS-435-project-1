@@ -231,9 +231,9 @@ public class Project1 {
             ID = BigInteger.ONE;
             key = new BigInteger("45");
             CA test = new CA();
-            boolean result = test.certify(ID,key);
-            System.out.println("The CA authority has the key inside it?: " + result);
+            //boolean result = test.certify(ID,key);
+           // System.out.println("The CA authority has the key inside it?: " + result);
             
-            System.out.println("------------------------------------ \n");
+          //  System.out.println("------------------------------------ \n");
         }
 }

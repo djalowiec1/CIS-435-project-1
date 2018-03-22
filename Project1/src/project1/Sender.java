@@ -63,7 +63,10 @@ public class Sender {
         BigInteger key = new BigInteger("5");
         packet[0] = shift.encrypt(message, key);
         rsa.genKeys();
+    
         BigInteger result = rsa.encrypt(message, rsa.getPublicKey());
+        BigInteger person = new BigInteger("1");
+        ca.register(person, rsa.getPublicKey());
         packet[1] = result;
         
         packet[2] = mc.encrypt(result, secret);
@@ -78,6 +81,8 @@ public class Sender {
         rsa.genKeys();
         
         BigInteger result = rsa.encrypt(message, rsa.getPublicKey());
+         BigInteger person = new BigInteger("1");
+        ca.register(person, rsa.getPublicKey());
         packet[1] = result;
         packet[2] = mc.encrypt(result, secret);
         return packet;
@@ -91,6 +96,8 @@ public class Sender {
         BigInteger result = rsa.encrypt(message, rsa.getPublicKey());
         packet[1] = result;
         BigInteger[] privateKey = rsa.getPrivateKey();
+        BigInteger person = new BigInteger("1");
+        ca.register(person, rsa.getPublicKey());
         BigInteger[] finalone = dg.sign(result, privateKey);
         packet[2] = finalone[1];
         
@@ -104,6 +111,8 @@ public class Sender {
             rsa.genKeys();
             BigInteger result = rsa.encrypt(message, rsa.getPublicKey());
             packet[1] = result;
+            BigInteger person = new BigInteger("1");
+            ca.register(person, rsa.getPublicKey());
             BigInteger[] privateKey = rsa.getPrivateKey();
             BigInteger[] finalone = dg.sign(result, privateKey);
             packet[2] = finalone[1];
