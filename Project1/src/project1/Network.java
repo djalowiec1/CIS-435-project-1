@@ -11,27 +11,25 @@ public class Network
 {
     Sender sndr = new Sender();
     //Receiver rcvr = new Receiver();
-    BigInteger m = new BigInteger("15");
+    BigInteger message;
     int hackedMessage;
+    
+    public void getPacketFromSender()
+    {
+        
+        
+    }
+    
+    public void deliverPacketToReceiver()
+    {
+        
+    }
     
     public BigInteger packetGetHacked()
     {
-        hackedMessage = m.intValue();
+        hackedMessage = message.intValue();
         hackedMessage+=5;
-        m = BigInteger.valueOf(hackedMessage);
-        return m;
+        message = BigInteger.valueOf(hackedMessage);
+        return message;
     }
-    
-    public BigInteger getPacketFromSender()
-    {
- 
-        return m;
-    }
-    
-    public BigInteger deliverPacketToReceiver()
-    {
-        
-        return m;
-    }
-    
 }

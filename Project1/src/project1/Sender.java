@@ -33,7 +33,7 @@ public class Sender {
     
     //Creates passed message
     public BigInteger[] generateMessage1(){
-          BigInteger secret = new BigInteger("2");
+        BigInteger secret = new BigInteger("2");
         BigInteger key = new BigInteger("5");
         packet[0] = shift.encrypt(message, key);
         rsa.genKeys();
@@ -45,7 +45,7 @@ public class Sender {
     }
       public BigInteger[]  generateMessage2(BigInteger m){
         BigInteger CBCkey = new BigInteger("2");
-         BigInteger secret = new BigInteger("2");
+        BigInteger secret = new BigInteger("2");
 
         packet[0] = cbc.encrypt(message, CBCkey);
         rsa.genKeys();
