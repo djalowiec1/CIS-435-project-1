@@ -59,10 +59,9 @@ public class Receiver {
         BigInteger[] publicKey = ca.getKey(person);
         
         //decrypt the RSA from orginal message
-         BigInteger rsa1 = rsa.decrypt(publicKey, secret);
-         
+         BigInteger rsa1 = rsa.decrypt(secret, publicKey);
          //decrypt the hash function to see
-         BigIntenger decryptedMessage = 
+         //BigIntenger decryptedMessage = 
          
         return message;
     }

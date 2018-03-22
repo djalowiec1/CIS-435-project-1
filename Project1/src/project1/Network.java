@@ -19,7 +19,7 @@ public class Network
     public void getPacketFromSender(BigInteger m)
     {
         message = m;
-        packet = sndr.sendPacketToNetwork();
+        packet = sndr.sendPacketToNetwork(m);
         i = sndr.getCombo();
         message = packet[1];
         

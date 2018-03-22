@@ -53,7 +53,7 @@ public class Sender {
         
         
         
-        sendPacketToNetwork();
+    
     }
     
     public int getCombo(){
@@ -124,9 +124,9 @@ public class Sender {
         return packet;
     }
     
-    public BigInteger[] sendPacketToNetwork(){
+    public BigInteger[] sendPacketToNetwork(BigInteger m){
         
-        
+        processMessage(m);
         return packet;
     }
 
