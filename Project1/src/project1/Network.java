@@ -11,12 +11,14 @@ public class Network
 {
     Sender sndr = new Sender();
     //Receiver rcvr = new Receiver();
+    BigInteger[] packet;
     BigInteger message;
     int hackedMessage;
     
     public void getPacketFromSender()
     {
-        
+        packet = sndr.sendPacketToNetwork();
+        message = packet[1];
         
     }
     
@@ -30,6 +32,7 @@ public class Network
         hackedMessage = message.intValue();
         hackedMessage+=5;
         message = BigInteger.valueOf(hackedMessage);
+        packet[1] = message;
         return message;
     }
 }
