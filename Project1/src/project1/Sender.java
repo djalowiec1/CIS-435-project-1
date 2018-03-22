@@ -29,6 +29,7 @@ public class Sender {
     
     //Creates passed message
     public BigInteger generateMessage1(BigInteger m){
+        
         message = m;
         return message;
     }
