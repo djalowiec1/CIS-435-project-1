@@ -25,6 +25,7 @@ public class Phase2Main {
         System.out.println("Combination One");
 
         ntwk.getPacketFromSender(m);
+        ntwk.packetGetHacked();
            
     }
 }
