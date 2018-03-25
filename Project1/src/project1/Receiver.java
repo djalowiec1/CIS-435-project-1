@@ -14,7 +14,6 @@ import java.util.Scanner;
  */
 public class Receiver extends Network  {
     BlockCipher block = new BlockCipher();
-
     CBC cbc = new CBC();
     DigitalSignature dg = new DigitalSignature();
     MacCipher mc = new MacCipher();
@@ -48,16 +47,15 @@ public class Receiver extends Network  {
 
     }
     
-    //ShiftCipher + RSA + MAC + CA
+    //ShiftCipher + RSA + Hash + CA
 
     public BigInteger getMessage1(){
-        BigInteger secret = new BigInteger("2");
-        BigInteger key = new BigInteger("5");
-        BigInteger person = new BigInteger("1");
+        BigInteger secret;
         
-        //Decrypt message and store
-        packet[0] = shift.decrypt(packet[0], key);
-        message = packet[0];
+        //Find out Secret using packet[1]
+        secret = rsa.decrypt(secret, packet)
+        
+        //Ksh(m) KrcPub(m) 
         
         //Sender checks if hashed message from mac = hashed message sent
         BigInteger messageCheck;

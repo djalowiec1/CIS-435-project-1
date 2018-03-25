@@ -15,10 +15,24 @@ public class Phase2Main {
     public static void main(String[] args){
         System.out.println("***** Secure Message System Simulation ***** ");
         
-     //   Sender sndr = new Sender();
+     // CA is created
+     
+     // Sender sndr = new Sender();
+     // sender creates keys
+     // sender puts SPub into CA
+     
+//      Receiver rcvr = new Receiver();
+//      receiver creates keys
+//      receiver puts keys into CA
+
+    // network
+    
+    // network operations
+
+        
+
         Network net = new Network();
      //   System.out.println("Sender is Created");
-//        Receiver rcvr = new Receiver();
         Network ntwk = new Network();
         BigInteger m = new BigInteger("15");
        // Sender p = new Sender();
@@ -29,9 +43,9 @@ public class Phase2Main {
         System.out.println("Orginal Message: "+ m);
         System.out.println("Packet Sender Sends out: ");
         ntwk.getPacketFromSender(m);
-        System.out.println("Decrypted Messag with no hacking:");
+        System.out.println("Decrypted Message with no hacking:");
         ntwk.deliverPacketToReceiver();
-        System.out.println("Decrypted Messag with hacking:");
+        System.out.println("Decrypted Message with hacking:");
         ntwk.packetGetHacked();
         System.out.println("============================================");
         

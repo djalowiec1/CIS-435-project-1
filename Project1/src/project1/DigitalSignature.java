@@ -13,16 +13,13 @@ import java.util.Random;
 public class DigitalSignature {
     
     //Outputs a biginteger array [message, encrypted msg Digest]
-    public BigInteger[] sign(BigInteger message, BigInteger[] privateKey)
+    public BigInteger sign(BigInteger message, BigInteger[] privateKey)
     {       
         //Create a way to sign with RSA
         RSA rsa = new RSA();
-        BigInteger[] signedMessage = new BigInteger[2];
+        BigInteger signedMessage = rsa.encrypt(message, privateKey);
         
         //Fill array with regular message and encrypted msg digest
-        signedMessage[0] = message;
-        signedMessage[1] = hash(message);
-        signedMessage[1] = rsa.encrypt(signedMessage[1], privateKey);
         return signedMessage;
     }
     
