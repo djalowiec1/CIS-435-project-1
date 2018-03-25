@@ -151,17 +151,16 @@ public class Sender extends Network {
         BigInteger secret = new BigInteger("2");
         BigInteger key = new BigInteger("1234");
         
-        //the message is encrypted with polyaplhabetic, and result is put in first part array index
+        //the message is encrypted with polyaplhabetic, and result is put in first part array 
         packet[0] = poly.encrypt(message, key);
           //rsa is called to generate the keys
-        //key is ecrypted with the message and public key, result is put inside pakcer[1]
+        //key is ecrypted with the message and public key of the receiver, result is put inside pakcet[1]
         BigInteger id = BigInteger.ZERO;
         BigInteger[] ReceviverKey = ca.getKey(id);
         BigInteger result = rsa.encrypt(message, ReceviverKey);
         packet[1] = result;
         BigInteger person = new BigInteger("1");  
-        // the public key is registered with the CA
-        ca.register(person, rsa.getPublicKey());
+        // the public key of the swis registered with the CA
         //digitial signature cipher is used to hash the message and make sure nothing was changed, result put in packer[2]
         BigInteger[] finalone = dg.sign(result, privateKey);
         packet[2] = finalone[1];
