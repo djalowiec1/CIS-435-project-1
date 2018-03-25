@@ -12,14 +12,29 @@ import java.util.Random;
 
 public class DigitalSignature {
     
-    //Outputs a biginteger array [message, encrypted msg Digest]
+    //Outputs a signed, hashed message only.
     public BigInteger sign(BigInteger message, BigInteger[] privateKey)
     {       
         //Create a way to sign with RSA
         RSA rsa = new RSA();
-        BigInteger signedMessage = rsa.encrypt(message, privateKey);
+        BigInteger hashedM = hash(message);
+        BigInteger signedMessage = rsa.encrypt(hashedM, privateKey);
         
         //Fill array with regular message and encrypted msg digest
+        return signedMessage;
+    }
+    
+    //Outputs a biginteger array [message, encrypted msg Digest]
+    public BigInteger[] signArray(BigInteger message, BigInteger[] privateKey)
+    {       
+        //Create a way to sign with RSA
+        RSA rsa = new RSA();
+        BigInteger[] signedMessage = new BigInteger[2];
+        
+        //Fill array with regular message and encrypted msg digest
+        signedMessage[0] = message;
+        signedMessage[1] = hash(message);
+        signedMessage[1] = rsa.encrypt(signedMessage[1], privateKey);
         return signedMessage;
     }
     

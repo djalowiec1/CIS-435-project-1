@@ -211,7 +211,7 @@ public class Project1 {
             
             //Create Message and encrypted message Digest
             BigInteger[] msgAndEncryptedMsg = new BigInteger[2];
-            msgAndEncryptedMsg = testDS.sign(testMessage, PrivKey);
+            msgAndEncryptedMsg = testDS.signArray(testMessage, PrivKey);
             System.out.println("\nCONCATENATION: \nOriginal Message: " + msgAndEncryptedMsg[0] + "\nSigned and Hashed Message: " + msgAndEncryptedMsg[1]);
             
             //Compare Message digest with decrypted encrypted message digest
