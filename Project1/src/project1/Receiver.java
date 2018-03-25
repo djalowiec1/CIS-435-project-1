@@ -13,49 +13,73 @@ import java.util.Scanner;
  * @author darek
  */
 public class Receiver {
-       BlockCipher block = new BlockCipher();
-      CA ca = new CA();
-      CBC cbc = new CBC();
-      DigitalSignature dg = new DigitalSignature();
-      MacCipher mc = new MacCipher();
-      PolyalphabeticCipher poly = new PolyalphabeticCipher();
-      RSA rsa = new RSA();
-      ShiftCipher shift = new ShiftCipher();
-      SubstitutionCipher sub = new SubstitutionCipher();
+    BlockCipher block = new BlockCipher();
+    CA ca = new CA();
+    CBC cbc = new CBC();
+    DigitalSignature dg = new DigitalSignature();
+    MacCipher mc = new MacCipher();
+    PolyalphabeticCipher poly = new PolyalphabeticCipher();
+    RSA rsa = new RSA();
+    ShiftCipher shift = new ShiftCipher();
+    SubstitutionCipher sub = new SubstitutionCipher();
     private BigInteger message;
     private int senderID;
     int i;
    
     BigInteger[] packet = new BigInteger[3];
+    
+
     //Default Message
     public void processPacket(){
-        if(i ==1){
-            getMessage1();
-        }
-        else if(i ==2){
-            getMessage2();
-         }
-        else if(i ==3){
-            getMessage3();
-        }
-        else
-            getMessage4();
+          switch (i) {
+              case 1:
+                  getMessage1();
+                  break;
+              case 2:
+                  getMessage2();
+                  break;
+              case 3:
+                  getMessage3();
+                  break;
+              default:
+                  getMessage4();
+                  break;
+          }
 
     }
     
     //ShiftCipher + RSA + MAC + CA
 
     public BigInteger getMessage1(){
-        return message;
-    }
-    //CBC + RSA +MAC + CA
-      public BigInteger  getMessage2(){
         BigInteger secret = new BigInteger("2");
         BigInteger key = new BigInteger("5");
         BigInteger person = new BigInteger("1");
-        //get the message by decryting the first packet
+        
+        //Decrypt message and store
+        packet[0] = shift.decrypt(packet[0], key);
+        message = packet[0];
+        
+        //Sender checks if hashed message from mac = hashed message sent
+        BigInteger messageCheck;
+        messageCheck = dg.hash(message);
+        if(messageCheck.equals(packet[2])){
+            System.out.println("Messages are Good to Use - Unchanged");
+            return message;
+        }else{
+            System.out.println("DO NOT USE MESSAGE. IT HAS CHANGED.");
+            return BigInteger.ZERO;
+        }
+    }
+
+    
+    public BigInteger  getMessage2(BigInteger[] pack){
+        
+        BigInteger secret = new BigInteger("2");
+        BigInteger key = new BigInteger("5");
+        BigInteger person = new BigInteger("1");
+        //get the message by decrypting the first packet
         BigInteger receivedMessage = shift.decrypt(packet[0], key);
-        //get the public key by callin CA
+        //get the public key by calling CA
         BigInteger[] publicKey = ca.getKey(person);
         
         //decrypt the RSA from orginal message
@@ -65,15 +89,28 @@ public class Receiver {
          
         return message;
     }
-      //SubstitutionCipher+ RSA + DigitalSignature + CA
-    public BigInteger getMessage3(){
-               return message;
+    
+    //SubstitutionCipher+ RSA + DigitalSignature + CA
+    public BigInteger getMessage3(){        
+        BigInteger secret = new BigInteger("2");
+        BigInteger key = new BigInteger("5");
+        
+        message = sub.decrypt(packet[0], key);
+        
+        dg.verifyDS(message, , )
+        return message;
     }
-        //polyalabetic + RSA + DigitalSignature + CA
-        public BigInteger getMessage4(){
-      
-            return message;
-     }
+    
+    //polyalabetic + RSA + DigitalSignature + CA
+    public BigInteger getMessage4(){
+        BigInteger secret = new BigInteger("2");
+        BigInteger key = new BigInteger("1234");
+        
+        message = poly.decrypt(packet[0], key);
+
+
+        return message;
+    }
     
     public void receivePacket(BigInteger[] packet1, int combo){
         

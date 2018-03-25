@@ -40,8 +40,8 @@ public class Sender {
       //asks user which combo to use
         System.out.println("Pick Which combination of Ciphers you want to use?: ");
         System.out.println("1: ShiftCipher + RSA + MAC + CA?: ");
-        System.out.println("2: CBC + RSA +MAC + CA?: ");
-        System.out.println("3: SubstitutionCipher+ RSA + DigitalSignature + CA?: ");
+        System.out.println("2: CBC + RSA + MAC + CA?: ");
+        System.out.println("3: SubstitutionCipher + RSA + DigitalSignature + CA?: ");
         System.out.println("4: polyalabetic + RSA + DigitalSignature + CA?: ");
         
         
@@ -79,7 +79,7 @@ public class Sender {
         
         //rsa is called to generate the keys
         rsa.genKeys();
-        //key is ecrypted with the message and public key, result is put inside pakcer[1]
+        //key is ecrypted with the message and public key, result is put inside packet[1]
         BigInteger result = rsa.encrypt(message, rsa.getPublicKey());
         BigInteger person = new BigInteger("1");
         
@@ -131,25 +131,26 @@ public class Sender {
         
         return packet;
     }
-        //polyalabetic + RSA + DigitalSignature + CA
-        public BigInteger[] generateMessage4(){
-            BigInteger secret = new BigInteger("2");
-            BigInteger key = new BigInteger("1234");
-             //the message is encrypted with polyaplhabetic, and result is put in first part array index
-            packet[0] = poly.encrypt(message, key);
-              //rsa is called to generate the keys
-            rsa.genKeys();
-            //key is ecrypted with the message and public key, result is put inside pakcer[1]
-            BigInteger result = rsa.encrypt(message, rsa.getPublicKey());
-            packet[1] = result;
-            BigInteger person = new BigInteger("1");  
-            // the public key is registered with the CA
-            ca.register(person, rsa.getPublicKey());
-            BigInteger[] privateKey = rsa.getPrivateKey();
-            //digitial signature cipher is used to hash the message and make sure nothing was changed, result put in packer[2]
-            BigInteger[] finalone = dg.sign(result, privateKey);
-            packet[2] = finalone[1];
+    //polyalabetic + RSA + DigitalSignature + CA
+    public BigInteger[] generateMessage4(){
+        BigInteger secret = new BigInteger("2");
+        BigInteger key = new BigInteger("1234");
         
+        //the message is encrypted with polyaplhabetic, and result is put in first part array index
+        packet[0] = poly.encrypt(message, key);
+          //rsa is called to generate the keys
+        rsa.genKeys();
+        //key is ecrypted with the message and public key, result is put inside pakcer[1]
+        BigInteger result = rsa.encrypt(message, rsa.getPublicKey());
+        packet[1] = result;
+        BigInteger person = new BigInteger("1");  
+        // the public key is registered with the CA
+        ca.register(person, rsa.getPublicKey());
+        BigInteger[] privateKey = rsa.getPrivateKey();
+        //digitial signature cipher is used to hash the message and make sure nothing was changed, result put in packer[2]
+        BigInteger[] finalone = dg.sign(result, privateKey);
+        packet[2] = finalone[1];
+
         return packet;
     }
     //connects to network
