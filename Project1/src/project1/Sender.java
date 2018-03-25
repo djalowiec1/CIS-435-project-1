@@ -42,23 +42,26 @@ public class Sender {
         System.out.println("1: ShiftCipher + RSA + MAC + CA?: ");
         System.out.println("2: CBC + RSA + MAC + CA?: ");
         System.out.println("3: SubstitutionCipher + RSA + DigitalSignature + CA?: ");
-        System.out.println("4: polyalabetic + RSA + DigitalSignature + CA?: ");
+        System.out.println("4: polyalpaabetic + RSA + DigitalSignature + CA?: ");
         
         
         //calls the class that matches the chocie
        Scanner sc = new Scanner(System.in);
        i = sc.nextInt();
-        if(i == 1){
-            generateMessage1();
-        }
-        else if(i == 2){
-            generateMessage2();
-        }
-         else if(i == 3){
-            generateMessage3();
-        }
-        else
-             generateMessage4();
+          switch (i) {
+              case 1:
+                  generateMessage1();
+                  break;
+              case 2:
+                  generateMessage2();
+                  break;
+              case 3:
+                  generateMessage3();
+                  break;
+              default:
+                  generateMessage4();
+                  break;
+          }
         
         
         
