@@ -12,9 +12,9 @@ import java.util.Scanner;
  *
  * @author darek
  */
-public class Receiver {
+public class Receiver extends Network  {
     BlockCipher block = new BlockCipher();
-    CA ca = new CA();
+
     CBC cbc = new CBC();
     DigitalSignature dg = new DigitalSignature();
     MacCipher mc = new MacCipher();
@@ -72,7 +72,7 @@ public class Receiver {
     }
 
     
-    public BigInteger  getMessage2(BigInteger[] pack){
+    public BigInteger  getMessage2(){
         
         BigInteger secret = new BigInteger("2");
         BigInteger key = new BigInteger("5");

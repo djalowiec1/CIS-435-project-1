@@ -12,11 +12,11 @@ import static java.lang.System.in;
 import java.math.BigInteger;
 import java.util.Scanner;
   
-public class Sender {
+public class Sender extends Network {
     
     //all the classess are refrenced
+    
       BlockCipher block = new BlockCipher();
-      CA ca = new CA();
       CBC cbc = new CBC();
       DigitalSignature dg = new DigitalSignature();
       MacCipher mc = new MacCipher();
@@ -24,12 +24,23 @@ public class Sender {
       RSA rsa = new RSA();
       ShiftCipher shift = new ShiftCipher();
       SubstitutionCipher sub = new SubstitutionCipher();
-    private BigInteger message;
-    private int senderID;
-    int i;
-    BigInteger[] packet = new BigInteger[3];
+        private BigInteger message;
+        private int senderID ;
+        int i;
+        BigInteger[] packet = new BigInteger[3];
     //Default Message
+         private BigInteger[] privateKey;
+         BigInteger[] publicKey;
     
+    
+    public Sender(){
+        rsa.genKeys();
+        privateKey = rsa.getPrivateKey();
+        publicKey = rsa.getPublicKey();
+        BigInteger person = new BigInteger("1");
+        ca.register(person, publicKey);
+        
+    }
     //gets called when message is received
     public void processMessage(BigInteger m){
         message = m;
@@ -38,6 +49,8 @@ public class Sender {
         //     System.out.println(packet1);
       // }
       //asks user which combo to use
+      
+        rsa.genKeys();
         System.out.println("Pick Which combination of Ciphers you want to use?: ");
         System.out.println("1: ShiftCipher + RSA + MAC + CA?: ");
         System.out.println("2: CBC + RSA + MAC + CA?: ");
@@ -81,13 +94,15 @@ public class Sender {
         packet[0] = shift.encrypt(message, key);
         
         //rsa is called to generate the keys
-        rsa.genKeys();
-        //key is ecrypted with the message and public key, result is put inside packet[1]
-        BigInteger result = rsa.encrypt(message, rsa.getPublicKey());
-        BigInteger person = new BigInteger("1");
+        //sender is 0
+        BigInteger id = BigInteger.ZERO;
+        BigInteger[] ReceviverKey = ca.getKey(id);
+        //key is ecrypted with the message and public key of receiver
+        BigInteger result = rsa.encrypt(message, ReceviverKey);
+
         
-        // the public key is registered with the CA
-        ca.register(person, rsa.getPublicKey());
+        // the public key of registered with the CA
+
         packet[1] = result;
         
         //mac cipher is used to hash the message and make sure nothing was changed, result put in packer[2]
@@ -101,12 +116,11 @@ public class Sender {
         //the message is encrypted with cbc, and result is put in first part array index
         packet[0] = cbc.encrypt(message, CBCkey);
          //rsa is called to generate the keys
-        rsa.genKeys();
         //key is ecrypted with the message and public key, result is put inside pakcer[1]
-        BigInteger result = rsa.encrypt(message, rsa.getPublicKey());
-         BigInteger person = new BigInteger("1");
+        BigInteger id = BigInteger.ZERO;
+        BigInteger[] ReceviverKey = ca.getKey(id);
+        BigInteger result = rsa.encrypt(message, ReceviverKey);
         // the public key is registered with the CA
-        ca.register(person, rsa.getPublicKey());
         packet[1] = result;
          //mac cipher is used to hash the message and make sure nothing was changed, result put in packer[2]
 
@@ -120,14 +134,12 @@ public class Sender {
          //the message is encrypted with subisitute, and result is put in first part array index
         packet[0] = sub.encrypt(message, key);
          //rsa is called to generate the keys
-        rsa.genKeys();
          //key is ecrypted with the message and public key, result is put inside pakcer[1]
-        BigInteger result = rsa.encrypt(message, rsa.getPublicKey());
+         BigInteger id = BigInteger.ZERO;
+        BigInteger[] ReceviverKey = ca.getKey(id);
+        BigInteger result = rsa.encrypt(message, ReceviverKey);
         packet[1] = result;
-        BigInteger[] privateKey = rsa.getPrivateKey();
-        BigInteger person = new BigInteger("1");
         // the public key is registered with the CA
-        ca.register(person, rsa.getPublicKey());
          //digitial signature cipher is used to hash the message and make sure nothing was changed, result put in packer[2]
         BigInteger[] finalone = dg.sign(result, privateKey);
         packet[2] = finalone[1];
@@ -142,14 +154,14 @@ public class Sender {
         //the message is encrypted with polyaplhabetic, and result is put in first part array index
         packet[0] = poly.encrypt(message, key);
           //rsa is called to generate the keys
-        rsa.genKeys();
         //key is ecrypted with the message and public key, result is put inside pakcer[1]
-        BigInteger result = rsa.encrypt(message, rsa.getPublicKey());
+        BigInteger id = BigInteger.ZERO;
+        BigInteger[] ReceviverKey = ca.getKey(id);
+        BigInteger result = rsa.encrypt(message, ReceviverKey);
         packet[1] = result;
         BigInteger person = new BigInteger("1");  
         // the public key is registered with the CA
         ca.register(person, rsa.getPublicKey());
-        BigInteger[] privateKey = rsa.getPrivateKey();
         //digitial signature cipher is used to hash the message and make sure nothing was changed, result put in packer[2]
         BigInteger[] finalone = dg.sign(result, privateKey);
         packet[2] = finalone[1];

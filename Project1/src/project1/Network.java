@@ -9,8 +9,9 @@ import java.math.BigInteger;
 
 public class Network 
 {
-    Sender sndr = new Sender();
+    public CA ca = new CA();
     Receiver rcvr = new Receiver();
+    Sender sndr = new Sender();
     BigInteger[] packet;
     BigInteger message;
     int hackedMessage;
