@@ -1,18 +1,17 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+* 
+
+* Receiver - Processes Packets to Decrypt Messages from Sender over Network
+
+ * @author <Tom Callahan>
+ * @date <3/24/2018>
  */
 package project1;
 
 import java.math.BigInteger;
-import java.util.Scanner;
 
-/**
- *
- * @author darek
- */
 public class Receiver extends Network  {
+    //Class Tools
     BlockCipher block = new BlockCipher();
     CBC cbc = new CBC();
     DigitalSignature dg = new DigitalSignature();
@@ -21,45 +20,55 @@ public class Receiver extends Network  {
     RSA rsa = new RSA();
     ShiftCipher shift = new ShiftCipher();
     SubstitutionCipher sub = new SubstitutionCipher();
+    
+    //Class Variables
+    private BigInteger secret;
     private BigInteger message;
-    private int senderID;
-    int i;
-   
+    int comboSelect;
+    BigInteger[] privateKey;
+    BigInteger[] publicKey;
     BigInteger[] packet = new BigInteger[3];
     
+    //Constructor
+    public Receiver(){
+        rsa.genKeys();
+        privateKey = rsa.getPrivateKey();
+        publicKey = rsa.getPublicKey();
+        BigInteger person = new BigInteger("0");
+        ca.register(person, publicKey);    
+    }
+    
+    //Receives Packet with selected Symmetric Key and Authenticity Combination.
+    public void receivePacket(BigInteger[] packet1, int combo){        
+        comboSelect = combo;
+        packet = packet1;
+    }
 
-    //Default Message
+    //Select Security Suite Combination
     public void processPacket(){
-          switch (i) {
-              case 1:
-                  getMessage1();
-                  break;
-              case 2:
-                  getMessage2();
-                  break;
-              case 3:
-                  getMessage3();
-                  break;
-              default:
-                  getMessage4();
-                  break;
-          }
-
+        switch (comboSelect) {
+            case 1:
+                getMessage1();
+                break;
+            case 2:
+                getMessage2();
+                break;
+            case 3:
+                getMessage3();
+                break;
+        }
     }
     
     //ShiftCipher + RSA + Hash + CA
-
-    public BigInteger getMessage1(){
-        BigInteger secret;
-        
+    public BigInteger getMessage1(){       
         //Find out Secret using packet[1]
-        secret = rsa.decrypt(secret, packet)
+        secret = rsa.decrypt(packet[1], privateKey);
         
-        //Ksh(m) KrcPub(m) 
+        //get message using packet[0]
+        message = shift.decrypt(packet[0], secret);
         
         //Sender checks if hashed message from mac = hashed message sent
-        BigInteger messageCheck;
-        messageCheck = dg.hash(message);
+        BigInteger messageCheck = dg.hash(message);
         if(messageCheck.equals(packet[2])){
             System.out.println("Messages are Good to Use - Unchanged");
             return message;
@@ -69,50 +78,40 @@ public class Receiver extends Network  {
         }
     }
 
-    
+    //CBC + RSA + MAC + CA
     public BigInteger  getMessage2(){
-        
-        BigInteger secret = new BigInteger("2");
-        BigInteger key = new BigInteger("5");
-        BigInteger person = new BigInteger("1");
-        //get the message by decrypting the first packet
-        BigInteger receivedMessage = shift.decrypt(packet[0], key);
-        //get the public key by calling CA
-        BigInteger[] publicKey = ca.getKey(person);
-        
-        //decrypt the RSA from orginal message
-         BigInteger rsa1 = rsa.decrypt(secret, publicKey);
-         //decrypt the hash function to see
-         //BigIntenger decryptedMessage = 
-         
-        return message;
-    }
-    
-    //SubstitutionCipher+ RSA + DigitalSignature + CA
-    public BigInteger getMessage3(){        
-        BigInteger secret = new BigInteger("2");
-        BigInteger key = new BigInteger("5");
-        
-        message = sub.decrypt(packet[0], key);
-        
-        dg.verifyDS(message, , )
-        return message;
-    }
-    
-    //polyalabetic + RSA + DigitalSignature + CA
-    public BigInteger getMessage4(){
-        BigInteger secret = new BigInteger("2");
-        BigInteger key = new BigInteger("1234");
-        
-        message = poly.decrypt(packet[0], key);
+        //get the secret using packet[1]
+        secret = rsa.decrypt(packet[1], privateKey);
 
-
-        return message;
+        //get the message by decrypting the packet[0]
+        message = cbc.decrypt(packet[0], secret);
+        
+        //Compare mac.encrypt with packet 2. if equal, message is good.
+        BigInteger messageCheck = mc.encrypt(message, secret);
+        if(messageCheck.equals(packet[2])){
+            System.out.println("Messages are Good to Use - Unchanged");
+            return message;
+        }else{
+            System.out.println("DO NOT USE MESSAGE. IT HAS CHANGED.");
+            return BigInteger.ZERO;
+        }
     }
     
-    public void receivePacket(BigInteger[] packet1, int combo){
+    //SubstitutionCipher + RSA + DigitalSignature + CA
+    public BigInteger getMessage3(){
+        //get secret using packet[1]
+        secret = rsa.decrypt(packet[1], privateKey);
+              
+        //Get the plaintext message using packet[0] and secret
+        message = sub.decrypt(packet[0], secret);
         
-        i = combo;
-        packet = packet1;
+        //Use DigitialSignature's verfification for authenticity
+        if(dg.verifyDS(message, packet[0], publicKey)){
+            System.out.println("Messages are Good to Use - Unchanged");
+            return message;
+        }else{
+            System.out.println("DO NOT USE MESSAGE. IT HAS CHANGED.");
+            return BigInteger.ZERO;
+        }
     }
 }

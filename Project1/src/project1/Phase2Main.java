@@ -7,10 +7,6 @@ package project1;
 
 import java.math.BigInteger;
 
-/**
- *
- * @author tcallahan
- */
 public class Phase2Main {
     public static void main(String[] args){
         System.out.println("***** Secure Message System Simulation ***** ");
