@@ -24,10 +24,10 @@ public class Sender extends Network {
       RSA rsa = new RSA();
       ShiftCipher shift = new ShiftCipher();
       SubstitutionCipher sub = new SubstitutionCipher();
-        private BigInteger message;
-        private int senderID ;
-        int i;
-        BigInteger[] packet = new BigInteger[3];
+      private BigInteger message;
+      BigInteger id = BigInteger.ZERO;
+      int i;
+      BigInteger[] packet = new BigInteger[3];
     //Default Message
          private BigInteger[] privateKey;
          BigInteger[] publicKey;
@@ -85,28 +85,23 @@ public class Sender extends Network {
         return i;
     }
     
-    //ShiftCipher + RSA + MAC + CA
+    //ShiftCipher + RSA + hash + CA
 
     public BigInteger[] generateMessage1(){
         BigInteger secret = new BigInteger("2");
         BigInteger key = new BigInteger("5");
         //the message is shifted, and result is put in first part array index
         packet[0] = shift.encrypt(message, key);
-        
-        //rsa is called to generate the keys
-        //sender is 0
-        BigInteger id = BigInteger.ZERO;
+        // the receivers public key is taken from CA
         BigInteger[] ReceviverKey = ca.getKey(id);
         //key is ecrypted with the message and public key of receiver
-        BigInteger result = rsa.encrypt(message, ReceviverKey);
-
-        
-        // the public key of registered with the CA
-
+        BigInteger result = rsa.encrypt(secret, ReceviverKey);
+        //result is put inside the pakcet[2];
         packet[1] = result;
-        
-        //mac cipher is used to hash the message and make sure nothing was changed, result put in packer[2]
-        packet[2] = mc.encrypt(result, secret);
+        //mac cipher is used to hash the message and make sure nothing was changed, result put in packet[2]
+         BigInteger hash = dg.hash(message);
+         packet[2] = shift.encrypt(hash, key);
+   
         return packet;
     }
     //CBC + RSA +MAC + CA
@@ -115,15 +110,12 @@ public class Sender extends Network {
         BigInteger secret = new BigInteger("2");
         //the message is encrypted with cbc, and result is put in first part array index
         packet[0] = cbc.encrypt(message, CBCkey);
-         //rsa is called to generate the keys
-        //key is ecrypted with the message and public key, result is put inside pakcer[1]
-        BigInteger id = BigInteger.ZERO;
+        // the receivers public key is taken from CA
         BigInteger[] ReceviverKey = ca.getKey(id);
+        //key is ecrypted with the message and public key, result is put inside pakcet[1]
         BigInteger result = rsa.encrypt(message, ReceviverKey);
-        // the public key is registered with the CA
         packet[1] = result;
          //mac cipher is used to hash the message and make sure nothing was changed, result put in packer[2]
-
         packet[2] = mc.encrypt(result, secret);
         return packet;
     }
