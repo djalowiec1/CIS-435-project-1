@@ -1,7 +1,7 @@
 /**
 * <p>Receives the message from network, then asks the user which combo to use. Then encrypts and sends over network
 *
-* @authors <Emily Benson, Tom Callahan, Cameron Conklin, Dariusz Jalowiec,
+* @author <Dariusz Jalowiec>,
 Clay Klinedinst>
 * @date <3/1/2018>
 */
