@@ -1,8 +1,7 @@
 /**
 * <p>Receives the message from network, then asks the user which combo to use. Then encrypts and sends over network
 *
-* @author <Dariusz Jalowiec>,
-Clay Klinedinst>
+* @author <Dariusz Jalowiec>
 * @date <3/1/2018>
 */
 
