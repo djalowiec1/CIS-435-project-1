@@ -63,13 +63,13 @@ public class Sender {
        System.out.println(i);
           switch (i) {
               case 1:
-                  generateMessage1();
+                  packet = generateMessage1();
                   break;
               case 2:
-                  generateMessage2();
+                  packet = generateMessage2();
                   break;
               default:
-                  generateMessage3();
+                  packet= generateMessage3();
                   break;
           }
         
@@ -92,15 +92,12 @@ public class Sender {
         System.out.println("public key is " + id);
         BigInteger id1 = BigInteger.ZERO;
 //        System.out.println( ca.getKey(id1));
-        System.out.println(";;;;;;;;;;;;;;;;;");
         BigInteger[] ReceiverKey = new BigInteger[2];
       //  System.out.println(ReceiverKey);
         ReceiverKey = ca.getKey(id1);
-        System.out.println(ReceiverKey);
         //key is ecrypted with the sharedsecret and public key of receiver
         BigInteger result = rsa.encrypt(sharedSecret, ReceiverKey);
         //result is put inside the pakcet[2];
-         System.out.println(";;;;;;;;;;;;;;;;; " + packet[1]);
         packet[1] = result;
         //the message is hased, and ecrtpted with the shift 
          BigInteger hash = dg.hash(message);

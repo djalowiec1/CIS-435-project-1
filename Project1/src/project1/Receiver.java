@@ -41,7 +41,6 @@ public class Receiver {
     
     //Receives Packet with selected Symmetric Key and Authenticity Combination.
     public void receivePacket(BigInteger[] packet1, int combo){        
-        System.out.println("::::::::::::::::::::::::::::::::::" + combo);
         comboSelect = combo;
         receiverPacket = packet1;
         processPacket();
@@ -51,7 +50,6 @@ public class Receiver {
     public void processPacket(){
         switch (comboSelect) {
             case 1:
-                System.out.println("HERE");
                 getMessage1();
                 break;
             case 2:
@@ -73,7 +71,9 @@ public class Receiver {
         
         //Sender checks if hashed message from mac = hashed message sent
         BigInteger messageCheck = dg.hash(receiverMessage);
-        if(messageCheck.equals(receiverPacket[2])){
+        System.out.println("MESSAGE IS " +receiverMessage  );
+       BigInteger shiftercheck = shift.encrypt(messageCheck, secret);
+        if(shiftercheck.equals(receiverPacket[2])){
             System.out.println("Messages are Good to Use - Unchanged");
             return receiverMessage;
         }else{

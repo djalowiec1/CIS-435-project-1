@@ -42,9 +42,10 @@ public class Network
         packet = sndr.sendPacketToNetwork(m);
         i = sndr.getCombo();
         message = packet[0];
-        for (BigInteger packet1 : packet) {
-             System.out.println(packet1);
-       }
+ 
+        //for (BigInteger packet1 : packet) {
+         //    System.out.println(packet1);
+       //}
        //System.out.println(message);
     }
     
