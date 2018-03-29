@@ -15,13 +15,12 @@ public class CA {
 
     public void fill() {
             BigInteger a,b,c,d,e;
-            a = new BigInteger("12");
-            b= new BigInteger("45");
-            c= new BigInteger("22");
-            d= new BigInteger("78");
+            a = new BigInteger("0");
+            b= new BigInteger("0");
+            c= new BigInteger("0");
+            d= new BigInteger("0");
             e= new BigInteger("0");
 
-            people[0][0] = a;
             people[1][0] = a;
             people[0][1] = a;
             people[1][1] = a;		
@@ -40,13 +39,10 @@ public class CA {
     }
 
     public BigInteger register(BigInteger ID, BigInteger Key[]){
-
         int p = ID.intValue();
-        p = 1;
-
-        if (people[0][p].equals(empty)&&people[1][p].equals(empty)){
-            people[0][p].equals(Key[0]);
-            people[1][p].equals(Key[1]);
+        if (people[0][p] == null&&people[1][p] == null){
+            people[0][p] = (Key[0]);
+            people[1][p] = (Key[1]);
         }
         else{
             while (!(people[0][p].equals(empty)&&people[1][p].equals(empty))){
@@ -68,10 +64,12 @@ public class CA {
 
 
     public BigInteger[] getKey(BigInteger ID) {
-
+         System.out.println("New ID is " );
+        int p = ID.intValue();
+        System.out.println("New ID is " + p);
             BigInteger Key[] = new BigInteger[2];
-
-            int p = ID.intValue();
+            System.out.println("HERE" + ID);
+ 
 
             Key[0] = people[0][p];
             Key[1] = people[1][p];

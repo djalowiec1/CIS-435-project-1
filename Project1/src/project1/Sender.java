@@ -43,7 +43,7 @@ public class Sender {
     //gets called when message is received
     public void processMessage(BigInteger m){
         message = m;
-        generateMessage1();
+//        generateMessage1();
         //for (BigInteger packet1 : packet) {
         //     System.out.println(packet1);
       // }
@@ -60,8 +60,10 @@ public class Sender {
         //calls the class that matches the chocie
        Scanner sc = new Scanner(System.in);
        i = sc.nextInt();
+       System.out.println(i);
           switch (i) {
               case 1:
+                  System.out.println("we hare here");
                   generateMessage1();
                   break;
               case 2:
@@ -88,7 +90,13 @@ public class Sender {
         //the message is shifted, and result is put in first part array index
         packet[0] = shift.encrypt(message, sharedSecret);
         // the receivers public key is taken from CA
-        BigInteger[] ReceiverKey = ca.getKey(id);
+        System.out.println("public key is " + id);
+        BigInteger id1 = BigInteger.ZERO;
+//        System.out.println( ca.getKey(id1));
+        System.out.println(";;;;;;;;;;;;;;;;;");
+        BigInteger[] ReceiverKey = new BigInteger[2];
+        ReceiverKey = ca.getKey(id1);
+        System.out.println(ReceiverKey);
         //key is ecrypted with the sharedsecret and public key of receiver
         BigInteger result = rsa.encrypt(sharedSecret, ReceiverKey);
         //result is put inside the pakcet[2];
@@ -105,7 +113,9 @@ public class Sender {
         //the message is encrypted with cbc, and result is put in first part array index
         packet[0] = cbc.encrypt(message, sharedSecret);
         // the receivers public key is taken from CA
-        BigInteger[] ReceviverKey = ca.getKey(id);
+        System.out.println( ca.getKey(id));
+         BigInteger id1 = BigInteger.ZERO;
+        BigInteger[] ReceviverKey = ca.getKey(id1);
         //key is ecrypted with the public key of the receiver
         BigInteger result = rsa.encrypt(sharedSecret, ReceviverKey);
         packet[1] = result;

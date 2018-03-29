@@ -19,16 +19,16 @@ public class Phase2Main {
         Sender sndr = new Sender();
         sndr.getCA(ca);
         System.out.println("SENDER CREATED");
-
+        BigInteger senderid = new BigInteger("1");
         //sender puts SPub into CA
-        ca.register(sndr.id, sndr.givePublicKey());
+        ca.register(senderid, sndr.givePublicKey());
 
         //Create receiver
         Receiver rcvr = new Receiver();
 
         //receiver creates keys
-        ca.register(rcvr.id, rcvr.givePublicKey());
-
+        ca.register(BigInteger.ZERO, rcvr.givePublicKey());
+        sndr.getCA(ca);
         // network
         Network ntwk = new Network();
 
