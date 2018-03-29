@@ -10,7 +10,7 @@ package project1;
 
 import java.math.BigInteger;
 
-public class Receiver extends Network  {
+public class Receiver {
     //Class Tools
     BlockCipher block = new BlockCipher();
     CBC cbc = new CBC();
@@ -22,26 +22,27 @@ public class Receiver extends Network  {
     SubstitutionCipher sub = new SubstitutionCipher();
     
     //Class Variables
-    private BigInteger secret;
-    private BigInteger message;
+    public BigInteger secret;
+    public BigInteger receiverMessage;
     int comboSelect;
     BigInteger[] privateKey;
     BigInteger[] publicKey;
-    BigInteger[] packet = new BigInteger[3];
-    
+    BigInteger[] receiverPacket;
+    final BigInteger person = BigInteger.ONE;
+    BigInteger id;
+
     //Constructor
     public Receiver(){
         rsa.genKeys();
         privateKey = rsa.getPrivateKey();
         publicKey = rsa.getPublicKey();
-        BigInteger person = new BigInteger("0");
-        ca.register(person, publicKey);    
+        BigInteger id = BigInteger.ONE; 
     }
     
     //Receives Packet with selected Symmetric Key and Authenticity Combination.
     public void receivePacket(BigInteger[] packet1, int combo){        
         comboSelect = combo;
-        packet = packet1;
+        receiverPacket = packet1;
     }
 
     //Select Security Suite Combination
@@ -62,16 +63,16 @@ public class Receiver extends Network  {
     //ShiftCipher + RSA + Hash + CA
     public BigInteger getMessage1(){       
         //Find out Secret using packet[1]
-        secret = rsa.decrypt(packet[1], privateKey);
+        secret = rsa.decrypt(receiverPacket[1], privateKey);
         
         //get message using packet[0]
-        message = shift.decrypt(packet[0], secret);
+        receiverMessage = shift.decrypt(receiverPacket[0], secret);
         
         //Sender checks if hashed message from mac = hashed message sent
-        BigInteger messageCheck = dg.hash(message);
-        if(messageCheck.equals(packet[2])){
+        BigInteger messageCheck = dg.hash(receiverMessage);
+        if(messageCheck.equals(receiverPacket[2])){
             System.out.println("Messages are Good to Use - Unchanged");
-            return message;
+            return receiverMessage;
         }else{
             System.out.println("DO NOT USE MESSAGE. IT HAS CHANGED.");
             return BigInteger.ZERO;
@@ -81,16 +82,16 @@ public class Receiver extends Network  {
     //CBC + RSA + MAC + CA
     public BigInteger  getMessage2(){
         //get the secret using packet[1]
-        secret = rsa.decrypt(packet[1], privateKey);
+        secret = rsa.decrypt(receiverPacket[1], privateKey);
 
         //get the message by decrypting the packet[0]
-        message = cbc.decrypt(packet[0], secret);
+        receiverMessage = cbc.decrypt(receiverPacket[0], secret);
         
         //Compare mac.encrypt with packet 2. if equal, message is good.
-        BigInteger messageCheck = mc.encrypt(message, secret);
-        if(messageCheck.equals(packet[2])){
+        BigInteger messageCheck = mc.encrypt(receiverMessage, secret);
+        if(messageCheck.equals(receiverPacket[2])){
             System.out.println("Messages are Good to Use - Unchanged");
-            return message;
+            return receiverMessage;
         }else{
             System.out.println("DO NOT USE MESSAGE. IT HAS CHANGED.");
             return BigInteger.ZERO;
@@ -100,18 +101,23 @@ public class Receiver extends Network  {
     //SubstitutionCipher + RSA + DigitalSignature + CA
     public BigInteger getMessage3(){
         //get secret using packet[1]
-        secret = rsa.decrypt(packet[1], privateKey);
+        secret = rsa.decrypt(receiverPacket[1], privateKey);
               
         //Get the plaintext message using packet[0] and secret
-        message = sub.decrypt(packet[0], secret);
+        receiverMessage = sub.decrypt(receiverPacket[0], secret);
         
         //Use DigitialSignature's verfification for authenticity
-        if(dg.verifyDS(message, packet[0], publicKey)){
+        if(dg.verifyDS(receiverMessage, receiverPacket[0], publicKey)){
             System.out.println("Messages are Good to Use - Unchanged");
-            return message;
+            return receiverMessage;
         }else{
             System.out.println("DO NOT USE MESSAGE. IT HAS CHANGED.");
             return BigInteger.ZERO;
         }
+    }
+    
+    //Give Network the Public Key to hand to CA
+    public BigInteger[] givePublicKey(){
+        return publicKey;
     }
 }

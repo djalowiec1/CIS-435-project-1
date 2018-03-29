@@ -11,7 +11,7 @@ import static java.lang.System.in;
 import java.math.BigInteger;
 import java.util.Scanner;
   
-public class Sender extends Network {
+public class Sender {
     
     //all the classess are refrenced
     
@@ -33,13 +33,14 @@ public class Sender extends Network {
     
     
     public Sender(){
+        System.out.println("Hello???");
         rsa.genKeys();
+        System.out.println("Am i generating keys?");
         privateKey = rsa.getPrivateKey();
         publicKey = rsa.getPublicKey();
-        BigInteger person = new BigInteger("1");
-        ca.register(person, publicKey);
-        
+        BigInteger id = BigInteger.ZERO; 
     }
+    
     //gets called when message is received
     public void processMessage(BigInteger m){
         message = m;
@@ -88,9 +89,9 @@ public class Sender extends Network {
         //the message is shifted, and result is put in first part array index
         packet[0] = shift.encrypt(message, sharedSecret);
         // the receivers public key is taken from CA
-        BigInteger[] ReceviverKey = ca.getKey(id);
+        BigInteger[] ReceiverKey = ca.getKey(id);
         //key is ecrypted with the sharedsecret and public key of receiver
-        BigInteger result = rsa.encrypt(sharedSecret, ReceviverKey);
+        BigInteger result = rsa.encrypt(sharedSecret, ReceiverKey);
         //result is put inside the pakcet[2];
         packet[1] = result;
         //the message is hased, and ecrtpted with the shift 
@@ -137,7 +138,8 @@ public class Sender extends Network {
         return packet;
     }
 
-
-    
-    
+    //Give Network the Public Key to hand to CA
+    public BigInteger[] givePublicKey(){
+        return publicKey;
+    }   
 }

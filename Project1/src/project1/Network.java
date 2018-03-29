@@ -9,13 +9,25 @@ import java.math.BigInteger;
 
 public class Network 
 {
-    public CA ca = new CA();
+    public CA ca;
     Receiver rcvr = new Receiver();
     Sender sndr = new Sender();
     BigInteger[] packet;
     BigInteger message;
     int hackedMessage;
     int i;
+    
+    public Network(){
+        ca = new CA();
+        //Register Sender
+        ca.register(BigInteger.ONE, sndr.givePublicKey());        
+        //Register Receiver
+        ca.register(BigInteger.ZERO, rcvr.givePublicKey());
+    }
+    
+    public BigInteger[] givePublicKeys(){
+        
+    }
     
     public void getPacketFromSender(BigInteger m)
     {

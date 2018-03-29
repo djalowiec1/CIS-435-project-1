@@ -11,30 +11,31 @@ public class Phase2Main {
     public static void main(String[] args){
         System.out.println("***** Secure Message System Simulation ***** ");
         
-     // CA is created
-     
-     // Sender sndr = new Sender();
-     // sender creates keys
-     // sender puts SPub into CA
-     
-//      Receiver rcvr = new Receiver();
-//      receiver creates keys
-//      receiver puts keys into CA
+        // CA is created
+        CA ca = new CA();
+        System.out.println("CA CREATED");
 
-    // network
-    
-    // network operations
+        //Sender Created 
+        Sender sndr = new Sender();
+        System.out.println("SENDER CREATED");
 
-        
+        //sender puts SPub into CA
+        ca.register(sndr.id, sndr.givePublicKey());
 
-        Network net = new Network();
-     //   System.out.println("Sender is Created");
+        //Create receiver
+        Receiver rcvr = new Receiver();
+
+        //receiver creates keys
+        ca.register(rcvr.id, rcvr.givePublicKey());
+
+        // network
         Network ntwk = new Network();
+
+        //create message for receiver to send
         BigInteger m = new BigInteger("15");
-       // Sender p = new Sender();
        
        
-        System.out.println("-------Testing------------");
+       System.out.println("-------Testing------------");
        // System.out.println("ShiftCipher + RSA + MAC + CA");
         System.out.println("Orginal Message: "+ m);
         System.out.println("Packet Sender Sends out: ");
