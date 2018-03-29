@@ -26,6 +26,7 @@ public class Sender {
       private BigInteger message;
       BigInteger id = BigInteger.ZERO;
       int i;
+      CA ca;
       BigInteger[] packet = new BigInteger[3];
     //Default Message
          private BigInteger[] privateKey;
@@ -138,6 +139,10 @@ public class Sender {
         return packet;
     }
 
+    public void getCA(CA c_a){
+        ca = c_a;
+    }
+    
     //Give Network the Public Key to hand to CA
     public BigInteger[] givePublicKey(){
         return publicKey;

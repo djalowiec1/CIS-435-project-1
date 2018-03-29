@@ -17,6 +17,7 @@ public class Phase2Main {
 
         //Sender Created 
         Sender sndr = new Sender();
+        sndr.getCA(ca);
         System.out.println("SENDER CREATED");
 
         //sender puts SPub into CA

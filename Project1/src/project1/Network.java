@@ -25,9 +25,9 @@ public class Network
         ca.register(BigInteger.ZERO, rcvr.givePublicKey());
     }
     
-    public BigInteger[] givePublicKeys(){
-        
-    }
+    public BigInteger[] getKeyFromCA(BigInteger ID){
+        return ca.getKey(ID);
+    } 
     
     public void getPacketFromSender(BigInteger m)
     {

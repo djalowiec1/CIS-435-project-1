@@ -16,8 +16,8 @@ import java.util.Random;
 public class RSA {
     
     //Public(n,e) and Private(n,d) Keys
-    static BigInteger[] publicKey = new BigInteger[2]; 
-    static BigInteger[] privateKey = new BigInteger[2];
+    BigInteger[] publicKey = new BigInteger[2]; 
+    BigInteger[] privateKey = new BigInteger[2];
     
     //Generate Public and Private Keys, storing them in class level variables
     public void genKeys()
