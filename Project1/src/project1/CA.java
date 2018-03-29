@@ -9,8 +9,8 @@
 package project1;
 import java.math.*;
 public class CA {
-	int long = 2^200; 
-	public BigInteger[][] people = new BigInteger[2][long];
+	BigInteger x = new BigInteger ("2^200"); 
+	public BigInteger[][] people = new BigInteger[2][x];
 	BigInteger empty = new BigInteger("0");
 	
 	public void fill() {
