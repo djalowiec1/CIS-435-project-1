@@ -71,12 +71,13 @@ public class Receiver {
         
         //Sender checks if hashed message from mac = hashed message sent
         BigInteger messageCheck = dg.hash(receiverMessage);
-        System.out.println("MESSAGE IS " +receiverMessage  );
        BigInteger shiftercheck = shift.encrypt(messageCheck, secret);
         if(shiftercheck.equals(receiverPacket[2])){
             System.out.println("Messages are Good to Use - Unchanged");
+            System.out.println("DECREYPTED MESSAGE " + receiverMessage );
             return receiverMessage;
         }else{
+
             System.out.println("DO NOT USE MESSAGE. IT HAS CHANGED.");
             return BigInteger.ZERO;
         }
@@ -93,9 +94,12 @@ public class Receiver {
         //Compare mac.encrypt with packet 2. if equal, message is good.
         BigInteger messageCheck = mc.encrypt(receiverMessage, secret);
         if(messageCheck.equals(receiverPacket[2])){
+            System.out.println("============================================");
             System.out.println("Messages are Good to Use - Unchanged");
+            System.out.println("DECREYPTED MESSAGE " + receiverMessage );
             return receiverMessage;
         }else{
+                  System.out.println("============================================");
             System.out.println("DO NOT USE MESSAGE. IT HAS CHANGED.");
             return BigInteger.ZERO;
         }
@@ -111,9 +115,12 @@ public class Receiver {
         
         //Use DigitialSignature's verfification for authenticity
         if(dg.verifyDS(receiverMessage, receiverPacket[0], publicKey)){
+            System.out.println("============================================");
             System.out.println("Messages are Good to Use - Unchanged");
+            System.out.println("DECREYPTED MESSAGE " + receiverMessage );
             return receiverMessage;
         }else{
+                  System.out.println("============================================");
             System.out.println("DO NOT USE MESSAGE. IT HAS CHANGED.");
             return BigInteger.ZERO;
         }

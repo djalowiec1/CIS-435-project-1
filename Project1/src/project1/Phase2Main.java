@@ -39,13 +39,17 @@ public class Phase2Main {
        System.out.println("-------Testing------------");
        // System.out.println("ShiftCipher + RSA + MAC + CA");
         System.out.println("Orginal Message: "+ m);
-        System.out.println("Packet Sender Sends out: ");
+        System.out.println("We send message to Sender to create the packer: ");
+
         ntwk.getPacketFromSender(m);
+ 
+        System.out.println("We send message to Receiver to decrypt the packer: ");
+        System.out.println("============================================");
         System.out.println("Decrypted Message with no hacking:");
+        System.out.println("============================================");
         ntwk.deliverPacketToReceiver();
         System.out.println("Decrypted Message with hacking:");
         ntwk.packetGetHacked();
-        System.out.println("============================================");
         
         
      //   System.out.println("Combination Two");
