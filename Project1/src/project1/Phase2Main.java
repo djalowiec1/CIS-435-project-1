@@ -46,7 +46,6 @@ public class Phase2Main {
         System.out.println("We send message to Receiver to decrypt the packer: ");
         System.out.println("============================================");
         System.out.println("Decrypted Message with no hacking:");
-        System.out.println("============================================");
         ntwk.deliverPacketToReceiver();
           System.out.println("============================================");
         System.out.println("Decrypted Message with hacking:");
