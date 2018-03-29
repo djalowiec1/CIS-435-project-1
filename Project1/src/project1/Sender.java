@@ -89,7 +89,6 @@ public class Sender {
         //the message is shifted, and result is put in first part array index
         packet[0] = shift.encrypt(message, sharedSecret);
         // the receivers public key is taken from CA
-        System.out.println("public key is " + id);
         BigInteger id1 = BigInteger.ZERO;
 //        System.out.println( ca.getKey(id1));
         BigInteger[] ReceiverKey = new BigInteger[2];
