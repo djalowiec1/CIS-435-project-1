@@ -43,7 +43,7 @@ public class Network
         message = BigInteger.valueOf(hackedMessage);
         packet[0] = message;
         rcvr.receivePacket(packet, i);
-        System.out.println(message);
+        System.out.println("Hacked Message: " + message);
         return message;
     }
 }
