@@ -10,7 +10,7 @@ package project1;
 import java.math.*;
 public class CA {
 
-	public BigInteger[][] people = new BigInteger[2][1000];
+	public BigInteger[][] people = new BigInteger[2][99999];
 	BigInteger empty = new BigInteger("0");
 	
 	public void fill() {
