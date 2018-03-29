@@ -1,6 +1,10 @@
 /**
- *
- * @author cklin
+ * @author <Clay Klinedinst>
+ * @date <3/22/18>
+ * 
+ * <p> Acts as the "middle man" between sender and receiver. Calls the sender,
+ * and gets the packet from it, then calls the receiver and sends the packet
+ * to it. Also allows the packet to be hacked and altered.
  */
 
 package project1;
