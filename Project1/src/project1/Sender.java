@@ -54,7 +54,6 @@ public class Sender {
         System.out.println("1: ShiftCipher + RSA + MAC + CA?: ");
         System.out.println("2: CBC + RSA + MAC + CA?: ");
         System.out.println("3: SubstitutionCipher + RSA + DigitalSignature + CA?: ");
-        System.out.println("4: polyalpaabetic + RSA + DigitalSignature + CA?: ");
         
         
         //calls the class that matches the chocie
@@ -68,9 +67,11 @@ public class Sender {
               case 2:
                   packet = generateMessage2();
                   break;
-              default:
+              case 3:
                   packet= generateMessage3();
                   break;
+              default:
+                    System.out.println("wrong choice");
           }
         
         

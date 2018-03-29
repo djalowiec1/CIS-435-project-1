@@ -58,6 +58,8 @@ public class Receiver {
             case 3:
                 getMessage3();
                 break;
+             default:
+                System.out.println("wrong choice");
         }
     }
     
@@ -94,12 +96,10 @@ public class Receiver {
         //Compare mac.encrypt with packet 2. if equal, message is good.
         BigInteger messageCheck = mc.encrypt(receiverMessage, secret);
         if(messageCheck.equals(receiverPacket[2])){
-            System.out.println("============================================");
             System.out.println("Messages are Good to Use - Unchanged");
             System.out.println("DECREYPTED MESSAGE " + receiverMessage );
             return receiverMessage;
         }else{
-                  System.out.println("============================================");
             System.out.println("DO NOT USE MESSAGE. IT HAS CHANGED.");
             return BigInteger.ZERO;
         }
@@ -115,12 +115,10 @@ public class Receiver {
         
         //Use DigitialSignature's verfification for authenticity
         if(dg.verifyDS(receiverMessage, receiverPacket[0], publicKey)){
-            System.out.println("============================================");
             System.out.println("Messages are Good to Use - Unchanged");
             System.out.println("DECREYPTED MESSAGE " + receiverMessage );
             return receiverMessage;
         }else{
-                  System.out.println("============================================");
             System.out.println("DO NOT USE MESSAGE. IT HAS CHANGED.");
             return BigInteger.ZERO;
         }
