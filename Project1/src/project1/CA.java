@@ -64,7 +64,7 @@ public class CA {
 
 
     public BigInteger[] getKey(BigInteger ID) {
-         System.out.println("New ID is " );
+         System.out.println("New ID is "  + ID );
         int p = ID.intValue();
         System.out.println("New ID is " + p);
             BigInteger Key[] = new BigInteger[2];

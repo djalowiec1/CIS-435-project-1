@@ -28,7 +28,7 @@ public class Phase2Main {
 
         //receiver creates keys
         ca.register(BigInteger.ZERO, rcvr.givePublicKey());
-        sndr.getCA(ca);
+       // sndr.getCA(ca);
         // network
         Network ntwk = new Network();
 

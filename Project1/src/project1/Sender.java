@@ -63,7 +63,6 @@ public class Sender {
        System.out.println(i);
           switch (i) {
               case 1:
-                  System.out.println("we hare here");
                   generateMessage1();
                   break;
               case 2:
@@ -95,6 +94,7 @@ public class Sender {
 //        System.out.println( ca.getKey(id1));
         System.out.println(";;;;;;;;;;;;;;;;;");
         BigInteger[] ReceiverKey = new BigInteger[2];
+      //  System.out.println(ReceiverKey);
         ReceiverKey = ca.getKey(id1);
         System.out.println(ReceiverKey);
         //key is ecrypted with the sharedsecret and public key of receiver
@@ -142,7 +142,7 @@ public class Sender {
 
     //connects to network
     public BigInteger[] sendPacketToNetwork(BigInteger m){
-        
+
         processMessage(m);
         return packet;
     }

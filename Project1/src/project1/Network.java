@@ -36,7 +36,9 @@ public class Network
     public void getPacketFromSender(BigInteger m)
     {
         message = m;
+                sndr.getCA(ca);
         sndr.sendPacketToNetwork(m);
+
         packet = sndr.sendPacketToNetwork(m);
         i = sndr.getCombo();
         message = packet[0];
