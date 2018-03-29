@@ -22,7 +22,7 @@ public class Network
         message = m;
         packet = sndr.sendPacketToNetwork(m);
         i = sndr.getCombo();
-        message = packet[1];
+        message = packet[0];
         for (BigInteger packet1 : packet) {
              System.out.println(packet1);
        }
@@ -41,7 +41,7 @@ public class Network
         hackedMessage = message.intValue();
         hackedMessage+=5;
         message = BigInteger.valueOf(hackedMessage);
-        packet[1] = message;
+        packet[0] = message;
         rcvr.receivePacket(packet, i);
         System.out.println(message);
         return message;
