@@ -41,14 +41,17 @@ public class Receiver {
     
     //Receives Packet with selected Symmetric Key and Authenticity Combination.
     public void receivePacket(BigInteger[] packet1, int combo){        
+        System.out.println("::::::::::::::::::::::::::::::::::" + combo);
         comboSelect = combo;
         receiverPacket = packet1;
+        processPacket();
     }
 
     //Select Security Suite Combination
     public void processPacket(){
         switch (comboSelect) {
             case 1:
+                System.out.println("HERE");
                 getMessage1();
                 break;
             case 2:

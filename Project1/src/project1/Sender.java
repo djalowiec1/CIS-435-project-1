@@ -100,6 +100,7 @@ public class Sender {
         //key is ecrypted with the sharedsecret and public key of receiver
         BigInteger result = rsa.encrypt(sharedSecret, ReceiverKey);
         //result is put inside the pakcet[2];
+         System.out.println(";;;;;;;;;;;;;;;;; " + packet[1]);
         packet[1] = result;
         //the message is hased, and ecrtpted with the shift 
          BigInteger hash = dg.hash(message);
