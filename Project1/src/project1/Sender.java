@@ -34,9 +34,7 @@ public class Sender {
     
     
     public Sender(){
-        System.out.println("Hello???");
         rsa.genKeys();
-        System.out.println("Am i generating keys?");
         privateKey = rsa.getPrivateKey();
         publicKey = rsa.getPublicKey();
         BigInteger id = BigInteger.ZERO; 
