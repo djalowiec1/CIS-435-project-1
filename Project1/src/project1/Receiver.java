@@ -125,17 +125,18 @@ public class Receiver {
         System.out.println("m: " + receiverMessage);
         
         //the receivers public key is taken from CA
-        BigInteger id1 = BigInteger.ONE;
+        BigInteger senderid = new BigInteger("1");
         BigInteger[] SenderKey = new BigInteger[2];
         
 ///////THIS HERE SHOULD BE ACCESSING SENDER'S PUBLIC KEY. IT WILL NOT RUN.        
-//        SenderKey = ca.getKey(id1);
-        System.out.println("SENDER KEY: ");
+        SenderKey = ca.getKey(senderid);
+        System.out.println("SENDER KEY: " + senderid);
+        //System.out.println("SENDER KEY: ");
         
         //Use DigitialSignature's verfification for authenticity
         
         //THIS LINE HERE: PUBLIC KEY SHOULD BE SENDER'S PUBLIC KEY. IT WILL NOT RUN.
-        if(dg.verifyDS(receiverMessage, receiverPacket[2], publicKey)){
+        if(dg.verifyDS(receiverMessage, receiverPacket[2], SenderKey)){
             System.out.println("Messages are Good to Use - Unchanged");
             System.out.println("DECREYPTED MESSAGE " + receiverMessage );
             return receiverMessage;

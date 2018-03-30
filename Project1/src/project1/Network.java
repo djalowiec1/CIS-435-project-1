@@ -45,6 +45,7 @@ public class Network
     
     public void deliverPacketToReceiver()
     {
+        rcvr.getCA(ca);
         rcvr.receivePacket(packet, i);
         //System.out.println("Message is:" + );
         
