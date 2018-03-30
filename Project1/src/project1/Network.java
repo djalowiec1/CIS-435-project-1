@@ -21,20 +21,17 @@ public class Network
     int hackedMessage;
     int i;
     
-    public Network(){
-        ca = new CA();
+    public Network(CA ca1){
+        ca = ca1;
         //Register Sender
-        ca.register(BigInteger.ONE, sndr.givePublicKey());        
+      //  ca.register(BigInteger.ONE, sndr.givePublicKey());        
         //Register Receiver
-        ca.register(BigInteger.ZERO, rcvr.givePublicKey());
+      //  ca.register(BigInteger.ZERO, rcvr.givePublicKey());
     }
     
     public BigInteger[] getKeyFromCA(BigInteger ID){
         return ca.getKey(ID);
     } 
-    public CA getCA(){
-        return ca;
-    }
     
     public void getPacketFromSender(BigInteger m)
     {

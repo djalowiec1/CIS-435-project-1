@@ -17,32 +17,34 @@ public class Phase2Main {
         
         //////////////////create entities////////////////////////////
         System.out.println("-----Entity Creation-----");
-        Network ntwk = new Network();
+                CA ca = new CA();
+ 
         // CA is created
-        CA ca = ntwk.getCA();
+
         System.out.println("CA is created.");
 
         //Sender Created and given access to CA
         Sender sndr = new Sender();
-     //   sndr.getCA(ca);
+        sndr.getCA(ca);
         System.out.println("Sender is created.");
         BigInteger senderid = new BigInteger("1");
         
         //sender puts SPub into CA
         System.out.println("SENDER ID INITIAL: " + sndr.givePublicKey()[0] + "\n" + sndr.givePublicKey()[1]);
-//        ca.register(senderid, sndr.givePublicKey());
-        System.out.println("Sender registered with CA. Public Key: " + Arrays.toString(sndr.givePublicKey()));
+        ca.register(senderid, sndr.givePublicKey());
+        System.out.println("Sender registered with CA. Public Key: " + Arrays.toString(ca.getKey(senderid)));
 
         //Create receiver and give public key to CA
         Receiver rcvr = new Receiver();
 
         System.out.println("Receiver Created");        
-      //  ca.register(BigInteger.ZERO, rcvr.givePublicKey());
+        ca.register(BigInteger.ZERO, rcvr.givePublicKey());
         System.out.println("Receiver registered with CA. Public Key: " + Arrays.toString(rcvr.givePublicKey()));
 
-        //Create network
-       //Network ntwk = new Network();
+        
+        Network ntwk = new Network(ca);
         System.out.println("Network (Internet) Created.");
+
 
         
         ///////////////////////////TESTING///////////////////////////////////
