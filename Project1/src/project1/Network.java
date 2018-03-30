@@ -32,6 +32,9 @@ public class Network
     public BigInteger[] getKeyFromCA(BigInteger ID){
         return ca.getKey(ID);
     } 
+    public CA getCA(){
+        return ca;
+    }
     
     public void getPacketFromSender(BigInteger m)
     {
