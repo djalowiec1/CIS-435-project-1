@@ -36,17 +36,11 @@ public class Network
     public void getPacketFromSender(BigInteger m)
     {
         message = m;
-                sndr.getCA(ca);
-        sndr.sendPacketToNetwork(m);
+        sndr.getCA(ca);
 
         packet = sndr.sendPacketToNetwork(m);
         i = sndr.getCombo();
         message = packet[0];
- 
-        //for (BigInteger packet1 : packet) {
-         //    System.out.println(packet1);
-       //}
-       //System.out.println(message);
     }
     
     public void deliverPacketToReceiver()

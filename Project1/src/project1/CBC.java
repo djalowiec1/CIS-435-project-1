@@ -102,6 +102,7 @@ public class CBC {
             System.out.println("Update IV from: " + dIV + " to " + nextdIV);
             dIV = nextdIV;
             System.out.println(". . . . . . . .");
+            System.out.println(strText); //TCTC
         }
         
         //convert StringBuffer to BigInteger

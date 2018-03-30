@@ -72,10 +72,6 @@ public class CA {
             Key[1] = people[1][p];
 
             return Key;
-
-
-
-
     }		
 }
 

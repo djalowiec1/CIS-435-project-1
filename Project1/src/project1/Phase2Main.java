@@ -1,61 +1,65 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+* 
+
+* <P>Receiver - Processes Packets to Decrypt Messages from Sender over Network
+
+ * @author <Dariusz Jalowiec, Tom Callahan>
+ * @date <3/24/2018>
  */
 package project1;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 
 public class Phase2Main {
     public static void main(String[] args){
         System.out.println("***** Secure Message System Simulation ***** ");
         
+        //////////////////create entities////////////////////////////
+        System.out.println("-----Entity Creation-----");
+        
         // CA is created
         CA ca = new CA();
-        System.out.println("CA CREATED");
+        System.out.println("CA is created.");
 
-        //Sender Created 
+        //Sender Created and given access to CA
         Sender sndr = new Sender();
         sndr.getCA(ca);
-        System.out.println("SENDER CREATED");
+        System.out.println("Sender is created.");
         BigInteger senderid = new BigInteger("1");
+        
         //sender puts SPub into CA
         ca.register(senderid, sndr.givePublicKey());
+        System.out.println("Sender registered with CA. Public Key: " + Arrays.toString(sndr.givePublicKey()));
 
-        //Create receiver
+        //Create receiver and give public key to CA
         Receiver rcvr = new Receiver();
 
-        //receiver creates keys
+        System.out.println("Receiver Created");        
         ca.register(BigInteger.ZERO, rcvr.givePublicKey());
-       // sndr.getCA(ca);
-        // network
-        Network ntwk = new Network();
+        System.out.println("Receiver registered with CA. Public Key: " + Arrays.toString(rcvr.givePublicKey()));
 
-        //create message for receiver to send
+        //Create network
+        Network ntwk = new Network();
+        System.out.println("Network (Internet) Created.");
+
+        
+        ///////////////////////////TESTING///////////////////////////////////
+        //create message for sender to send
         BigInteger m = new BigInteger("15");
-       
-       
-       System.out.println("-------Testing------------");
-       // System.out.println("ShiftCipher + RSA + MAC + CA");
+        System.out.println("\n-------Testing-------");
         System.out.println("Orginal Message: "+ m);
-        System.out.println("We send message to Sender to create the packer: ");
+        System.out.println("Sender Passes Encrypted message packet to network.. ");
 
         ntwk.getPacketFromSender(m);
  
-        System.out.println("We send message to Receiver to decrypt the packer: ");
+        System.out.println("Network Passes Message Packet to Receiver.. ");
         System.out.println("============================================");
         System.out.println("Decrypted Message with no hacking:");
         ntwk.deliverPacketToReceiver();
-          System.out.println("============================================");
+        System.out.println("============================================");
         System.out.println("Decrypted Message with hacking:");
         ntwk.packetGetHacked();
-        
-        
-     //   System.out.println("Combination Two");
-
-        //ntwk.getPacketFromSender(m);
-       // ntwk.packetGetHacked();
            
     }
 }
