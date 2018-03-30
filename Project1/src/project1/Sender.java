@@ -158,7 +158,6 @@ public class Sender {
     
     //Give Network the Public Key to hand to CA
     public BigInteger[] givePublicKey(){
-  
         return publicKey;
     }   
 }

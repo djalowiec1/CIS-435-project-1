@@ -21,12 +21,12 @@ public class Network
     int hackedMessage;
     int i;
     
-    public Network(CA ca1){
-        ca = ca1;
+    public Network(BigInteger[] sender){
+        ca = new CA();
         //Register Sender
-      //  ca.register(BigInteger.ONE, sndr.givePublicKey());        
+        ca.register(BigInteger.ONE, sender);        
         //Register Receiver
-      //  ca.register(BigInteger.ZERO, rcvr.givePublicKey());
+        ca.register(BigInteger.ZERO, rcvr.givePublicKey());
     }
     
     public BigInteger[] getKeyFromCA(BigInteger ID){
