@@ -130,7 +130,7 @@ public class Receiver {
         
 ///////THIS HERE SHOULD BE ACCESSING SENDER'S PUBLIC KEY. IT WILL NOT RUN.        
         SenderKey = ca.getKey(senderid);
-        System.out.println("SENDER KEY: " + senderid);
+        System.out.println("SENDER KEY: " + SenderKey[0] + "\n" + SenderKey[1]);
         //System.out.println("SENDER KEY: ");
         
         //Use DigitialSignature's verfification for authenticity

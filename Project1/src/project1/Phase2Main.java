@@ -29,6 +29,7 @@ public class Phase2Main {
         BigInteger senderid = new BigInteger("1");
         
         //sender puts SPub into CA
+        System.out.println("SENDER ID INITIAL: " + sndr.givePublicKey()[0] + "\n" + sndr.givePublicKey()[1]);
         ca.register(senderid, sndr.givePublicKey());
         System.out.println("Sender registered with CA. Public Key: " + Arrays.toString(sndr.givePublicKey()));
 
