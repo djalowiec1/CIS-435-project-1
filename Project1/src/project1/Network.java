@@ -42,7 +42,7 @@ public class Network
         i = sndr.getCombo();
         message = packet[0];
     }
-    
+       
     public void deliverPacketToReceiver()
     {
         rcvr.getCA(ca);

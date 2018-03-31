@@ -117,25 +117,20 @@ public class Receiver {
         //get secret using packet[1]
         secret = rsa.decrypt(receiverPacket[1], privateKey);
         System.out.println("Get Ksub: KbPriv(KbPublic(Kcbc)) = Ksub");
-
               
         //Get the plaintext message using packet[0] and secret
         receiverMessage = sub.decrypt(receiverPacket[0], secret);
         System.out.println("Get m:  Ksub(Ksub(m))");
         System.out.println("m: " + receiverMessage);
         
-        //the receivers public key is taken from CA
+        //the Senders public key is taken from CA
         BigInteger senderid = new BigInteger("1");
         BigInteger[] SenderKey = new BigInteger[2];
-        
-///////THIS HERE SHOULD BE ACCESSING SENDER'S PUBLIC KEY. IT WILL NOT RUN.        
+                
         SenderKey = ca.getKey(senderid);
         System.out.println("SENDER KEY: " + SenderKey[0] + "\n" + SenderKey[1]);
-        //System.out.println("SENDER KEY: ");
-        
+        System.out.println("RECV PACKET[2] = " + receiverPacket[2]);
         //Use DigitialSignature's verfification for authenticity
-        
-        //THIS LINE HERE: PUBLIC KEY SHOULD BE SENDER'S PUBLIC KEY. IT WILL NOT RUN.
         if(dg.verifyDS(receiverMessage, receiverPacket[2], SenderKey)){
             System.out.println("Messages are Good to Use - Unchanged");
             System.out.println("DECREYPTED MESSAGE " + receiverMessage );
@@ -154,5 +149,15 @@ public class Receiver {
     //Give Network the Public Key to hand to CA
     public BigInteger[] givePublicKey(){
         return publicKey;
+    }
+    
+    public void showKeys(){
+        BigInteger sid = new BigInteger("1");
+        BigInteger rid = new BigInteger("0");
+        BigInteger[] s = ca.getKey(sid);
+        BigInteger[] r = ca.getKey(rid);
+        
+        System.out.println("Sender registered with CA. Public Key: " + s[0] + "\n\t\t\t" + s[1]);
+        System.out.println("Sender registered with CA. Public Key: " + r[0] + "\n\t\t\t" + r[1]);
     }
 }

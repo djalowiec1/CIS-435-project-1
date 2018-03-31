@@ -18,6 +18,7 @@ public class DigitalSignature {
         //Create a way to sign with RSA
         RSA rsa = new RSA();
         BigInteger hashedM = hash(message);
+        System.out.println("Hashed Message: " + hashedM);
         BigInteger signedMessage = rsa.encrypt(hashedM, privateKey);
         
         //Fill array with regular message and encrypted msg digest
@@ -41,13 +42,19 @@ public class DigitalSignature {
     //Verify message received was authentic
     public boolean verifyDS(BigInteger message, BigInteger cipher, BigInteger[] publicKey)
     {
+        System.out.println("Message: " + message);
+        System.out.println("Cipher: " + cipher);
+        System.out.println("Pk0: " + publicKey[0]);
+        System.out.println("Pk2: " + publicKey[1]);
         RSA rsa = new RSA();
         BigInteger messageDigest;
         BigInteger decryptedDigest;
         
         //Hash message to compare with hashed decrypted message
         messageDigest = hash(message);
+        System.out.println("Hashed Message: " + messageDigest);
         decryptedDigest = rsa.decrypt(cipher, publicKey);
+        System.out.println("Decrypted Digest: " + decryptedDigest);
 
         //Returns true if messageDigest equals decryptedDigest
         return(messageDigest == decryptedDigest);
